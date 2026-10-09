@@ -1,4 +1,4 @@
-const posts = [
+let posts = [
   {
     slug: 'start-with-a-note', date: '2026-10-09', title: '把零散的技术想法，整理成可检索的笔记', excerpt: '一个轻量的笔记系统，不必一开始就很复杂。先记下来，再用标签和链接，让知识慢慢长出脉络。', tags: ['写作', '工作流'], read: '3 分钟',
     sections: [
@@ -63,6 +63,7 @@ let selectedTag = '';
 yearNode.textContent = new Date().getFullYear();
 
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const renderInline = value => escapeHTML(value).replace(/&lt;code&gt;([\s\S]*?)&lt;\/code&gt;/gi, '<code>$1</code>').replace(/`([^`\n]+)`/g, '<code>$1</code>');
 const allTags = () => [...new Set(posts.flatMap(post => post.tags))].sort((a,b) => a.localeCompare(b, 'zh-CN'));
 const tagCount = tag => posts.filter(post => post.tags.includes(tag)).length;
 const dateLabel = date => date.replaceAll('-', '.');
@@ -92,7 +93,7 @@ function homeMarkup() {
 
 function postCards(items) {
   if (!items.length) return `<div class="empty-state"><strong>没有找到匹配的笔记</strong><span>换个关键词或标签试试。</span></div>`;
-  return items.map(post => `<article class="post-card"><time class="post-date" datetime="${post.date}">${dateLabel(post.date)} <span class="sample-badge">示例</span></time><div class="post-body"><h3><a href="#post/${post.slug}">${escapeHTML(post.title)}</a></h3><p class="post-excerpt">${escapeHTML(post.excerpt)}</p><div class="post-meta">${tagLinks(post.tags)}</div></div><a class="post-arrow" href="#post/${post.slug}" aria-label="阅读：${escapeHTML(post.title)}">↗</a></article>`).join('');
+  return items.map(post => `<article class="post-card"><time class="post-date" datetime="${escapeHTML(post.date)}">${escapeHTML(dateLabel(post.date))}</time><div class="post-body"><h3><a href="#post/${encodeURIComponent(post.slug)}">${escapeHTML(post.title)}</a></h3><p class="post-excerpt">${escapeHTML(post.excerpt)}</p><div class="post-meta">${tagLinks(post.tags)}</div></div><a class="post-arrow" href="#post/${encodeURIComponent(post.slug)}" aria-label="阅读：${escapeHTML(post.title)}">↗</a></article>`).join('');
 }
 
 function getFilteredPosts() {
@@ -151,13 +152,13 @@ function renderPost(slug) {
   const post = posts.find(item => item.slug === slug);
   if (!post) return renderNotFound();
   selectedTag = '';
-  const body = post.sections.map(([type, ...values]) => {
-    if (type === 'h2') return `<h2>${values.join('')}</h2>`;
-    if (type === 'ul') return `<ul>${values.map(value => `<li>${value}</li>`).join('')}</ul>`;
+  const body = (Array.isArray(post.sections) ? post.sections : []).map(([type, ...values]) => {
+    if (type === 'h2') return `<h2>${renderInline(values.join(''))}</h2>`;
+    if (type === 'ul') return `<ul>${values.map(value => `<li>${renderInline(value)}</li>`).join('')}</ul>`;
     if (type === 'code') return `<pre><code>${escapeHTML(values.join(''))}</code></pre>`;
-    return `<p>${values.join('')}</p>`;
+    return `<p>${renderInline(values.join('')).replace(/\n/g, '<br>')}</p>`;
   }).join('');
-  app.innerHTML = `<article class="article-wrap fade-in"><div class="breadcrumbs"><a href="#home">首页</a> / <a href="#archive">笔记</a> / ${escapeHTML(post.title)}</div><div class="article-meta">${dateLabel(post.date)} &nbsp;·&nbsp; ${post.read}阅读 &nbsp;·&nbsp; 示例笔记</div><h1 class="article-title">${escapeHTML(post.title)}</h1><p class="article-deck">${escapeHTML(post.excerpt)}</p><div class="article-tags">${tagLinks(post.tags)}</div><div class="article-content">${body}</div><div class="article-end"><span>这是一篇用于展示页面效果的示例笔记。</span><a class="back-link" href="#home">← 回到首页</a></div></article>`;
+  app.innerHTML = `<article class="article-wrap fade-in"><div class="breadcrumbs"><a href="#home">首页</a> / <a href="#archive">笔记</a> / ${escapeHTML(post.title)}</div><div class="article-meta">${escapeHTML(dateLabel(post.date))} &nbsp;·&nbsp; ${escapeHTML(post.read || '')}阅读</div><h1 class="article-title">${escapeHTML(post.title)}</h1><p class="article-deck">${escapeHTML(post.excerpt)}</p><div class="article-tags">${tagLinks(post.tags || [])}</div><div class="article-content">${body}</div><div class="article-end"><span>记录于 Linote。</span><a class="back-link" href="#home">← 回到首页</a></div></article>`;
   activeNav('');
 }
 
@@ -195,4 +196,15 @@ menuToggle.addEventListener('click', () => {
 });
 window.addEventListener('hashchange', route);
 window.addEventListener('scroll', () => document.querySelector('.back-to-top')?.classList.toggle('visible', window.scrollY > 450), {passive:true});
-route();
+(async () => {
+  try {
+    const response = await fetch(`/posts.json?updated=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`文章数据加载失败（HTTP ${response.status}）`);
+    const remotePosts = await response.json();
+    if (!Array.isArray(remotePosts)) throw new Error('文章数据格式无效');
+    posts = remotePosts;
+  } catch (error) {
+    console.warn('[Linote] 读取 posts.json 失败，使用内置备份文章。', error);
+  }
+  route();
+})();
