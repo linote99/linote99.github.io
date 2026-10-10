@@ -7,6 +7,7 @@ const activeLinks = currentPath.startsWith('links/');
 const activeAbout = currentPath.startsWith('about/');
 const activeTitle = page.title ? `${page.title} | Linote` : 'Linote — 技术笔记与日常记录';
 const activeDescription = page.description || page.summary || config.description;
+const footerCopy = site.data.footer;
 %><!doctype html>
 <html lang="zh-CN">
 <head>
@@ -34,7 +35,7 @@ const activeDescription = page.description || page.summary || config.description
         <a class="<%= activeHome ? 'active' : '' %>" href="<%- url_for('/') %>" data-nav="home">首页</a>
         <a class="<%= activeArchive ? 'active' : '' %>" href="<%- url_for('/archives/') %>" data-nav="archive">归档</a>
         <a class="<%= activeTags ? 'active' : '' %>" href="<%- url_for('/tags/') %>" data-nav="tags">标签</a>
-        <a class="<%= activeLinks ? 'active' : '' %>" href="<%- url_for('/links/') %>" data-nav="links">友情链接</a>
+        <a class="<%= activeLinks ? 'active' : '' %>" href="<%- url_for('/links/') %>" data-nav="links">友链</a>
         <a class="<%= activeAbout ? 'active' : '' %>" href="<%- url_for('/about/') %>" data-nav="about">关于</a>
       </nav>
       <a class="header-cta" href="<%- url_for('/') %>#notes">开始阅读 <span aria-hidden="true">↘</span></a>
@@ -47,18 +48,18 @@ const activeDescription = page.description || page.summary || config.description
     <div class="footer-main">
       <div>
         <a class="wordmark footer-wordmark" href="<%- url_for('/') %>">Linote<span>.</span></a>
-        <p>把值得记住的事，写下来。</p>
+        <p><%= footerCopy.slogan %></p>
       </div>
       <div class="footer-links">
-        <a href="<%- url_for('/about/') %>">关于本站</a>
-        <a href="<%- url_for('/privacy/') %>">使用与隐私</a>
-        <a href="<%- url_for('/tags/') %>">浏览标签</a>
-        <a href="<%- url_for('/links/') %>">友情链接</a>
+        <a href="<%- url_for('/about/') %>"><%= footerCopy.aboutLinkLabel %></a>
+        <a href="<%- url_for('/privacy/') %>"><%= footerCopy.privacyLinkLabel %></a>
+        <a href="<%- url_for('/tags/') %>"><%= footerCopy.tagsLinkLabel %></a>
+        <a href="<%- url_for('/links/') %>"><%= footerCopy.friendsLinkLabel %></a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© <span id="year"><%= new Date().getFullYear() %></span> Linote</span>
-      <span>用好奇心记录世界 <span class="footer-star">✳</span></span>
+      <span><%= footerCopy.bottomLine %> <span class="footer-star">✳</span></span>
     </div>
   </footer>
   <button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部">↑</button>

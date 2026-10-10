@@ -1,25 +1,26 @@
 <%
 const posts = site.posts.sort('date', -1).toArray();
 const tags = site.tags.sort('name').toArray();
+const homeCopy = site.data.home;
 %><section class="hero fade-in" aria-labelledby="hero-title">
   <div class="hero-text">
-    <div class="eyebrow">PERSONAL TECH NOTES&nbsp; / &nbsp;记录 · 思考 · 实践</div>
-    <h1 id="hero-title">把知识写下来，<br>让灵感<em>可追溯。</em></h1>
-    <p class="hero-copy">你好，欢迎来到 Linote。这里收集技术实践、问题排查和那些值得留下来的小想法。慢慢写，常回来。</p>
-    <div class="hero-actions"><a class="button-primary" href="#notes">浏览笔记 <span aria-hidden="true">↘</span></a><a class="button-secondary" href="<%- url_for('/tags/') %>">按标签探索 <span aria-hidden="true">→</span></a></div>
+    <div class="eyebrow"><%= homeCopy.eyebrowEnglish %>&nbsp; / &nbsp;<%= homeCopy.eyebrowChinese %></div>
+    <h1 id="hero-title"><%= homeCopy.titleLineOne %><br><%= homeCopy.titleLineTwo %><em><%= homeCopy.titleEmphasis %></em></h1>
+    <p class="hero-copy"><%= homeCopy.heroCopy %></p>
+    <div class="hero-actions"><a class="button-primary" href="#notes"><%= homeCopy.primaryActionLabel %> <span aria-hidden="true">↘</span></a><a class="button-secondary" href="<%- url_for('/tags/') %>"><%= homeCopy.secondaryActionLabel %> <span aria-hidden="true">→</span></a></div>
   </div>
   <div class="hero-art"><img src="<%- url_for('/assets/linote-logo.png') %>" alt="黑底白字的 Linote 标志"><div class="art-caption"><span>LINOTE / NOTEBOOK Nº 01</span><span>EST. 2026</span></div><div class="art-mark" aria-hidden="true">✳</div></div>
 </section>
 <div class="hero-rule"></div>
-<div class="quick-note"><span class="spark" aria-hidden="true">✳</span><span>一处安静的角落，记录正在学习和正在解决的问题。</span></div>
+<div class="quick-note"><span class="spark" aria-hidden="true">✳</span><span><%= homeCopy.quickNote %></span></div>
 <section class="content-wrap" id="notes" aria-labelledby="notes-title">
-  <div class="section-head"><div><p class="section-kicker">THE NOTEBOOK</p><h2 id="notes-title">最近的笔记</h2><p>把好奇心变成可以回看的记录。</p></div><div class="section-count" id="result-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
+  <div class="section-head"><div><p class="section-kicker"><%= homeCopy.sectionKicker %></p><h2 id="notes-title"><%= homeCopy.sectionTitle %></h2><p><%= homeCopy.sectionDescription %></p></div><div class="section-count" id="result-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
   <div class="filter-row">
     <div class="tag-list" id="tag-filter" aria-label="筛选标签">
-      <button class="tag-pill selected" type="button" data-tag="">全部 <span class="tag-num"><%= posts.length %></span></button>
+      <button class="tag-pill selected" type="button" data-tag=""><%= homeCopy.allTagsLabel %> <span class="tag-num"><%= posts.length %></span></button>
       <% tags.forEach((tag) => { const count = tag.posts.toArray().length; %><button class="tag-pill" type="button" data-tag="<%= tag.name %>"><%= tag.name %> <span class="tag-num"><%= count %></span></button><% }); %>
     </div>
-    <label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索标题、内容或标签…" aria-label="搜索笔记"></label>
+    <label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="<%= homeCopy.searchPlaceholder %>" aria-label="搜索笔记"></label>
   </div>
   <div id="post-list" class="post-list">
     <% posts.forEach((post) => { %><%- partial('_partial/post-card', { post }) %><% }); %>
