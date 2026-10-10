@@ -16,4 +16,4 @@ permalink: "about/index.html"
 
 ## 如何联系我
 
-联系邮箱 <a href="mailto:cmccmail@qq.com">cmccmail@qq.com</a>
+我的邮箱 <a href="mailto:cmccmail@qq.com">cmccmail@qq.com</a>
