@@ -7,7 +7,8 @@ permalink: "links/index.html"
 description: Lino笔记的友情链接列表。
 ---
 
-- [Lino盘](https://pan.linote.top)
+- [Lino盘](https://pan.linote.top)——我个人的内容库
+- [Minikano的小窝](https://kanokano.cn/)——鹿友，经常会开坑忘填（划掉）のblog
 
 ## 以下是我的信息：
 
