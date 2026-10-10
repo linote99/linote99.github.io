@@ -7,6 +7,4 @@ permalink: "links/index.html"
 description: Linote 的友情链接列表。
 ---
 
-## 友链整理中
-
-- [Lino盘](https://pan.linote.top)
+##- [Lino盘](https://pan.linote.top)
