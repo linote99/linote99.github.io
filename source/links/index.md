@@ -20,7 +20,7 @@ description: Lino笔记的友情链接列表。
     </div>
     <div>
       <dt>简介</dt>
-      <dd>把值得记住的事，写下来。</dd>
+      <dd>这个人很神秘。</dd>
     </div>
     <div>
       <dt>链接</dt>
