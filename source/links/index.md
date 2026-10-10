@@ -32,7 +32,7 @@ description: Lino笔记的友情链接列表。
     </div>
     <div>
       <dt>申请方式</dt>
-      <dd><a href="mailto:cmccmail@qq.com">cmccmail@qq.com</a></dd>
+      <dd><a href="mailto:cmccmail@qq.com">cmccmail@qq.com</a>——将网站名称，网址，简介（如有）发送到我邮箱即可</dd>
     </div>
   </dl>
 </div>
