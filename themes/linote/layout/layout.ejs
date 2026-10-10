@@ -3,6 +3,7 @@ const currentPath = String(page.path || '');
 const activeHome = is_home();
 const activeArchive = is_archive() || currentPath.startsWith('archives/');
 const activeTags = is_tag() || currentPath.startsWith('tags/');
+const activeLinks = currentPath.startsWith('links/');
 const activeAbout = currentPath.startsWith('about/');
 const activeTitle = page.title ? `${page.title} | Linote` : 'Linote — 技术笔记与日常记录';
 const activeDescription = page.description || page.summary || config.description;
@@ -33,6 +34,7 @@ const activeDescription = page.description || page.summary || config.description
         <a class="<%= activeHome ? 'active' : '' %>" href="<%- url_for('/') %>" data-nav="home">首页</a>
         <a class="<%= activeArchive ? 'active' : '' %>" href="<%- url_for('/archives/') %>" data-nav="archive">归档</a>
         <a class="<%= activeTags ? 'active' : '' %>" href="<%- url_for('/tags/') %>" data-nav="tags">标签</a>
+        <a class="<%= activeLinks ? 'active' : '' %>" href="<%- url_for('/links/') %>" data-nav="links">友情链接</a>
         <a class="<%= activeAbout ? 'active' : '' %>" href="<%- url_for('/about/') %>" data-nav="about">关于</a>
       </nav>
       <a class="header-cta" href="<%- url_for('/') %>#notes">开始阅读 <span aria-hidden="true">↘</span></a>
@@ -51,6 +53,7 @@ const activeDescription = page.description || page.summary || config.description
         <a href="<%- url_for('/about/') %>">关于本站</a>
         <a href="<%- url_for('/privacy/') %>">使用与隐私</a>
         <a href="<%- url_for('/tags/') %>">浏览标签</a>
+        <a href="<%- url_for('/links/') %>">友情链接</a>
       </div>
     </div>
     <div class="footer-bottom">
