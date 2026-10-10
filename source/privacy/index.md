@@ -2,7 +2,7 @@
 title: 使用与隐私
 layout: page
 kicker: SITE NOTES
-lead: Linote 以静态页面展示公开文章，不提供账户、评论或订阅表单。
+lead: Lino笔记以静态页面展示公开文章，不提供账户、评论或订阅表单。
 permalink: privacy/index.html
 ---
 

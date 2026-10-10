@@ -1,8 +1,8 @@
 ---
-title: 关于 Linote
+title: 关于 Lino笔记
 layout: page
 kicker: A LITTLE ABOUT
-lead: Linote 是一个记录技术实践、整理思路和收藏灵感的小站。
+lead: Lino笔记是一个记录技术实践、整理思路和收藏灵感的小站。
 permalink: about/index.html
 ---
 

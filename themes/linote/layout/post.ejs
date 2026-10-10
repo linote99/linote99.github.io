@@ -8,5 +8,5 @@ const readLabel = page.read || '';
   <p class="article-deck"><%= page.summary || page.excerpt || '' %></p>
   <div class="article-tags"><% tags.forEach((tag) => { %><a class="post-tag" href="<%- url_for(tag.path) %>"><%= tag.name %></a><% }); %></div>
   <div class="article-content"><%- page.content %></div>
-  <div class="article-end"><span>记录于 Linote。</span><a class="back-link" href="<%- url_for('/') %>">← 回到首页</a></div>
+  <div class="article-end"><span>记录于 Lino笔记。</span><a class="back-link" href="<%- url_for('/') %>">← 回到首页</a></div>
 </article>

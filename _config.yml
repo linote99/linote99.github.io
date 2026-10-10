@@ -1,10 +1,10 @@
-# Linote Hexo configuration
+# Lino笔记 Hexo configuration
 # The current published address remains https://linote99.github.io/.
-title: Linote
+title: Lino笔记
 subtitle: 技术笔记与日常记录
-description: Linote · 记录技术、整理思路、留住灵感。
+description: Lino笔记 · 记录技术、整理思路、留住灵感。
 keywords:
-  - Linote
+  - Lino笔记
   - 技术笔记
 author: lino
 language: zh-CN
