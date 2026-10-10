@@ -1,0 +1,9 @@
+<%
+const tags = site.tags.sort('name').toArray();
+const posts = site.posts.sort('date', -1).toArray();
+%><section class="content-wrap fade-in">
+  <div class="section-head"><div><p class="section-kicker">TOPICS</p><h2>按主题探索</h2><p>从一个关键词开始，继续往下读。</p></div><div class="section-count"><%= String(tags.length).padStart(2, '0') %> TAGS</div></div>
+  <div class="tag-cloud"><% tags.forEach((tag) => { const count = tag.posts.toArray().length; %><a class="tag-pill" href="<%- url_for(tag.path) %>"><%= tag.name %> <span class="tag-num"><%= count %></span></a><% }); %></div>
+  <div class="section-head"><div><p class="section-kicker">ALL NOTES</p><h2>所有笔记</h2></div><div class="section-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
+  <div class="post-list"><% posts.forEach((post) => { %><%- partial('_partial/post-card', { post }) %><% }); %></div>
+</section>

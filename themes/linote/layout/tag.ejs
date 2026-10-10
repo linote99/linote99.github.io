@@ -1,0 +1,9 @@
+<%
+const posts = page.posts.sort('date', -1).toArray();
+const tagName = String(page.tag && (page.tag.name || page.tag) || '');
+%><section class="content-wrap fade-in">
+  <div class="breadcrumbs"><a href="<%- url_for('/') %>">首页</a> / <a href="<%- url_for('/tags/') %>">标签</a> / <%= tagName %></div>
+  <div class="section-head"><div><p class="section-kicker">TAG ARCHIVE</p><h2># <%= tagName %></h2><p>与这个主题相关的记录。</p></div><div class="section-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
+  <div class="post-list"><% posts.forEach((post) => { %><%- partial('_partial/post-card', { post }) %><% }); %></div>
+  <p style="margin-top:28px"><a class="back-link" href="<%- url_for('/tags/') %>">← 查看全部标签</a></p>
+</section>

@@ -1,0 +1,12 @@
+<%
+const tags = page.tags && typeof page.tags.toArray === 'function' ? page.tags.toArray() : [];
+const readLabel = page.read || '';
+%><article class="article-wrap fade-in">
+  <div class="breadcrumbs"><a href="<%- url_for('/') %>">首页</a> / <a href="<%- url_for('/archives/') %>">笔记</a> / <%= page.title %></div>
+  <div class="article-meta"><%= date(page.date, 'YYYY.MM.DD') %> &nbsp;·&nbsp; <%= readLabel %>阅读</div>
+  <h1 class="article-title"><%= page.title %></h1>
+  <p class="article-deck"><%= page.summary || page.excerpt || '' %></p>
+  <div class="article-tags"><% tags.forEach((tag) => { %><a class="post-tag" href="<%- url_for(tag.path) %>"><%= tag.name %></a><% }); %></div>
+  <div class="article-content"><%- page.content %></div>
+  <div class="article-end"><span>记录于 Linote。</span><a class="back-link" href="<%- url_for('/') %>">← 回到首页</a></div>
+</article>

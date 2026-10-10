@@ -1,0 +1,11 @@
+<%
+const posts = site.posts.sort('date', -1).toArray();
+const groups = {};
+posts.forEach((post) => {
+  const year = date(post.date, 'YYYY');
+  (groups[year] ||= []).push(post);
+});
+%><section class="content-wrap fade-in">
+  <div class="section-head"><div><p class="section-kicker">ARCHIVE</p><h2>按时间归档</h2><p>每一条记录，都是走过的一个小步骤。</p></div><div class="section-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
+  <% Object.keys(groups).sort().reverse().forEach((year) => { %><div class="archive-year"><%= year %> <span>— <%= groups[year].length %> 篇</span></div><div class="post-list"><% groups[year].forEach((post) => { %><%- partial('_partial/post-card', { post }) %><% }); %></div><% }); %>
+</section>

@@ -1,0 +1,46 @@
+# Linote Hexo configuration
+# The current published address remains https://linote99.github.io/.
+title: Linote
+subtitle: 技术笔记与日常记录
+description: Linote · 记录技术、整理思路、留住灵感。
+keywords:
+  - Linote
+  - 技术笔记
+author: lino
+language: zh-CN
+timezone: Asia/Shanghai
+
+url: https://linote99.github.io
+root: /
+permalink: posts/:title/
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
+
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+new_post_name: :title.md
+default_layout: post
+post_asset_folder: false
+filename_case: 1
+
+# Render all posts in a single generated feed; browser-side search paginates the list.
+per_page: 0
+archive_generator:
+  per_page: 0
+  yearly: true
+  monthly: false
+  daily: false
+tag_generator:
+  per_page: 0
+
+marked:
+  breaks: false
+  smartypants: false
+  sanitizeUrl: true
+  dompurify: true
+
+meta_generator: false
+theme: linote
