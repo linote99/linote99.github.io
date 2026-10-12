@@ -1,17 +1,18 @@
 ---
-title: 把重复表格流程变成可复用工作流：WPS 表格多源汇总处理器
-date: 2026-10-10 22:19:00
-description: 介绍一款面向 Windows 11 与 WPS 表格的 XLSX 多源汇总和自动化处理工具。
-summary: "介绍一款面向 Windows 11 与 WPS 表格的 XLSX 多源汇总和自动化处理工具。"
-categories:
-  - 工具
-tags:
-  - WPS
-  - Excel
-  - 自动化
+title: "把重复表格流程变成可复用工作流：WPS 表格多源汇总处理器"
+date: "2026-10-10 00:00:00"
 slug: "wps-sheet-automation"
 permalink: "posts/wps-sheet-automation/"
+summary: "介绍一款面向 Windows 11 与 WPS 表格的 XLSX 多源汇总和自动化处理工具。"
+read: "3 分钟"
 layout: post
+tags:
+  - "WPS"
+  - "Excel"
+  - "自动化"
+description: 介绍一款面向 Windows 11 与 WPS 表格的 XLSX 多源汇总和自动化处理工具。
+categories:
+  - 工具
 ---
 
 # 把重复表格流程变成可复用工作流：WPS 表格多源汇总处理器
@@ -51,3 +52,7 @@ layout: post
 ## 适用范围
 
 工具面向 Windows 11 与 WPS 表格，主要处理无宏 XLSX 工作簿，尤其适合需要把多份来源按固定规则汇总到模板、并重复执行公式与区域处理的场景。公式计算由 WPS 执行。正式用于关键业务前，建议先用副本和少量样例数据验证配置结果。
+
+## 下载
+
+GitHub——[下载 WPS表格多源汇总处理器](https://github.com/linote99/wps-sheet-automation)
