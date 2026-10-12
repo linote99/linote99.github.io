@@ -16,4 +16,4 @@ permalink: "about/index.html"
 
 ## 如何联系我
 
-我的邮箱： <dd><a href="mailto:linote99@foxmail.com">linote99@foxmail.com</a></dd>
+我的邮箱： <a href="mailto:linote99@foxmail.com">linote99@foxmail.com</a>
