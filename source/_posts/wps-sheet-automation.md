@@ -55,4 +55,8 @@ categories:
 
 ## 下载
 
+夸克云盘——[下载 WPS表格多源汇总处理器](https://pan.quark.cn/s/a77d88414f85)
+
 GitHub——[下载 WPS表格多源汇总处理器](https://github.com/linote99/wps-sheet-automation)
+
+Lino盘——[下载 WPS表格多源汇总处理器](https://pan.linote.top/WPS%20%E8%A1%A8%E6%A0%BC%E5%A4%9A%E6%BA%90%E6%B1%87%E6%80%BB%E5%A4%84%E7%90%86%E5%99%A8-win%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%8C%85)
