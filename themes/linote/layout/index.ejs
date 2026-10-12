@@ -9,10 +9,10 @@ const homeCopy = site.data.home;
     <p class="hero-copy"><%= homeCopy.heroCopy %></p>
     <div class="hero-actions"><a class="button-primary" href="#notes"><%= homeCopy.primaryActionLabel %> <span aria-hidden="true">↘</span></a><a class="button-secondary" href="<%- url_for('/tags/') %>"><%= homeCopy.secondaryActionLabel %> <span aria-hidden="true">→</span></a></div>
   </div>
-  <div class="hero-art"><img src="<%- url_for('/assets/linote-logo.png') %>" alt="Lino笔记标志"><div class="art-caption"><span>LINO笔记 / NOTEBOOK Nº 01</span><span>EST. 2026</span></div><div class="art-mark" aria-hidden="true">✳</div></div>
+  <div class="hero-art"><img src="<%- url_for('/assets/linote-logo.png') %>" alt="Lino笔记标志"><div class="art-caption"><span>LINO笔记 / NOTEBOOK Nº 01</span><span>EST. 2026</span></div><div class="art-mark" aria-hidden="true">✳︎</div></div>
 </section>
 <div class="hero-rule"></div>
-<div class="quick-note"><span class="spark" aria-hidden="true">✳</span><span><%= homeCopy.quickNote %></span></div>
+<div class="quick-note"><span class="spark" aria-hidden="true">✳︎</span><span><%= homeCopy.quickNote %></span></div>
 <section class="content-wrap" id="notes" aria-labelledby="notes-title">
   <div class="section-head"><div><p class="section-kicker"><%= homeCopy.sectionKicker %></p><h2 id="notes-title"><%= homeCopy.sectionTitle %></h2><p><%= homeCopy.sectionDescription %></p></div><div class="section-count" id="result-count"><%= String(posts.length).padStart(2, '0') %> NOTES</div></div>
   <div class="filter-row">
