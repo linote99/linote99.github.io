@@ -1,5 +1,5 @@
 # Lino笔记 Hexo configuration
-# The current published address remains https://linote99.github.io/.
+# The canonical public address is https://www.linote.top/.
 title: Lino笔记
 subtitle: 技术笔记与日常记录
 description: Lino笔记 · 记录技术、整理思路、留住灵感。
@@ -10,7 +10,7 @@ author: lino
 language: zh-CN
 timezone: Asia/Shanghai
 
-url: https://linote99.github.io
+url: https://www.linote.top
 root: /
 permalink: posts/:title/
 pretty_urls:

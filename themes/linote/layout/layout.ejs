@@ -18,6 +18,8 @@ const footerCopy = site.data.footer;
   <meta property="og:title" content="<%= activeTitle %>">
   <meta property="og:description" content="<%= activeDescription %>">
   <meta property="og:type" content="<%= is_post() ? 'article' : 'website' %>">
+  <link rel="canonical" href="<%- config.url %><%- url_for(page.path) %>">
+  <meta property="og:url" content="<%- config.url %><%- url_for(page.path) %>">
   <title><%= activeTitle %></title>
   <link rel="icon" type="image/png" href="<%- url_for('/assets/linote-logo.png') %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
