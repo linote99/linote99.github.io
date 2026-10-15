@@ -4,7 +4,7 @@ date: "2026-10-10 00:00:00"
 slug: "lino-backup"
 permalink: "posts/lino-backup/"
 summary: "介绍 Lino备份的图库整理、WebDAV 备份与恢复功能。"
-read: "2 分钟"
+read: "1 分钟"
 layout: post
 tags:
   - "备份"
@@ -35,5 +35,3 @@ Lino备份支持通过 WebDAV 配置远程存储节点，并按备份索引和�
 GitHub——[下载Lino备份](https://github.com/linote99/lino-backup-source)
 
 夸克网盘——[下载Lino备份](https://pan.quark.cn/s/ebcfe4819dc0)
-
-Lino盘——[下载Lino备份](https://pan.linote.top/Lino备份)
