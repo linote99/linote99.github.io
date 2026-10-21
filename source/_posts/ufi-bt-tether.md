@@ -4,7 +4,7 @@ date: "2026-10-15 00:00:00"
 slug: "ufi-bt-tether"
 permalink: "posts/ufi-bt-tether/"
 summary: "一个 UFI-TOOLS 插件：既能把 UFI 的网络用蓝牙分享出去，也能借手机的蓝牙网络上网，并把这条链路共享给连在 UFI 上的设备。"
-read: "4 分钟"
+read: "5 分钟"
 layout: post
 tags:
   - "UFI-TOOLS"
@@ -98,10 +98,6 @@ categories:
 
 ## 下载
 
-GitHub——[下载 蓝牙中继 v1.4（插件）](https://github.com/linote99/ufi-bt-tether/releases/download/v1.4/ufi-bt-tether-v1.4.js)
-
-GitHub——[下载 lino-bt-panu-v1.0.zip（Magisk 模块，蓝牙上网需要）](https://github.com/linote99/ufi-bt-tether/releases/download/v1.4/lino-bt-panu-v1.0.zip)
-
-插件仓库（含源码与文档）——[linote99/ufi-bt-tether](https://github.com/linote99/ufi-bt-tether)
+GitHub插件仓库（含源码与文档）——[linote99/ufi-bt-tether](https://github.com/linote99/ufi-bt-tether)
 
 安装顺序是先刷模块、重启，再装插件。只做蓝牙共享的话跳过模块即可。
