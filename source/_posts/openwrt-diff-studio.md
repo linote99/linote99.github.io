@@ -4,7 +4,7 @@ date: "2026-10-24 00:00:00"
 slug: "openwrt-diff-studio"
 permalink: "posts/openwrt-diff-studio/"
 summary: "电脑版 OpenWrt Diff Studio 的安卓移植：在手机上比较两版完整发行包，生成只含变更文件的差异包，再通过 SSH 直接更新设备，配置、额外插件和用户数据都保留。"
-read: "8 分钟"
+read: "9 分钟"
 layout: post
 tags:
   - "OpenWrt"
@@ -127,6 +127,8 @@ App 分成两页，各管一件事。
 
 ## 下载
 
-GitHub——[下载 OpenWrt Diff Studio（安卓版）](https://pan.quark.cn/s/67c237e5b17b)
+觉得对你有用的话，可以点击赞赏按钮给我打赏，谢谢！
+
+夸克网盘——[下载 OpenWrt Diff Studio（安卓版）](https://pan.quark.cn/s/67c237e5b17b)
 
 App 自身源码采用 MIT License；ext4 读取部分（`Ext4.java`）采用 AGPL-3.0-or-later，因此 APK 整体按 AGPL-3.0 分发。设备端运行时文件来自电脑版 OpenWrt Diff Studio，版权归原作者。
