@@ -35,3 +35,57 @@
 .friend-profile-fields dt{font-size:12px;line-height:1.6}
 .friend-profile-fields dd{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
 @media(max-width:600px){.friend-profile{margin:14px 0 22px;padding:7px 11px}.friend-profile-fields>div{grid-template-columns:45px minmax(0,1fr);gap:8px;padding:8px 0}}
+
+/* Homepage tag filter: collapsed to a single row with an expand/collapse toggle */
+.tag-pill.tag-hidden{display:none}
+.tag-toggle{border-style:dashed;color:var(--accent);white-space:nowrap}
+.tag-toggle:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.tag-toggle[hidden]{display:none}
+.tag-toggle .tag-num{color:inherit;opacity:.75}
+.tag-toggle .tag-caret{display:inline-block;margin-left:4px;transition:transform .2s}
+.tag-toggle[aria-expanded="true"] .tag-caret{transform:rotate(180deg)}
+.tag-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Floating, draggable reward button */
+.reward-fab{position:fixed;right:24px;bottom:74px;z-index:6;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:var(--accent);color:#fff;font:700 17px/1 "Noto Sans SC",var(--sans);box-shadow:0 8px 22px rgba(197,91,63,.34),0 2px 6px rgba(29,29,27,.14);cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;display:grid;place-items:center}
+.reward-fab.is-placed{right:auto;bottom:auto;left:0;top:0;transition:left .28s cubic-bezier(.2,.8,.2,1),top .28s cubic-bezier(.2,.8,.2,1),transform .15s,box-shadow .15s}
+.reward-fab.is-dragging{transition:none;cursor:grabbing;transform:scale(1.08);box-shadow:0 14px 30px rgba(197,91,63,.4),0 3px 8px rgba(29,29,27,.18)}
+.reward-fab:hover{filter:brightness(1.05)}
+.reward-fab:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.reward-fab span{pointer-events:none;transform:translateY(-.5px)}
+.reward-safe-probe{position:fixed;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+
+/* Reward dialog */
+.reward-overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(29,29,27,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:reward-fade .18s ease-out}
+.reward-overlay[hidden]{display:none}
+.reward-panel{position:relative;width:100%;max-width:560px;max-height:calc(100% - 8px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px 28px 22px;box-shadow:0 24px 60px rgba(29,29,27,.24);animation:reward-pop .22s cubic-bezier(.2,.8,.2,1);outline:none}
+.reward-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--muted);font-size:20px;line-height:1;cursor:pointer}
+.reward-close:hover{color:var(--accent);border-color:var(--accent)}
+.reward-close:focus-visible,.reward-tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.reward-kicker{margin:0;font:10px var(--mono);letter-spacing:.14em;color:var(--accent)}
+.reward-panel h2{margin:6px 40px 6px 0;font-size:24px;line-height:1.35;letter-spacing:-.04em}
+.reward-message{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.8}
+.reward-tabs{display:none}
+.reward-codes{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.reward-code{margin:0;padding:12px 12px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:center}
+.reward-code img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;max-width:260px;margin:0 auto;border-radius:4px;background:#fff;-webkit-touch-callout:default}
+.reward-code figcaption{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:8px;color:var(--ink);font-size:13px;font-weight:700}
+.reward-dot{width:8px;height:8px;border-radius:50%;background:#07c160}
+.reward-code.is-alipay .reward-dot{background:#1677ff}
+.reward-note{margin:16px 0 0;color:#8a877f;font-size:11.5px;line-height:1.7;text-align:center}
+body.reward-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden}
+@keyframes reward-fade{from{opacity:0}to{opacity:1}}
+@keyframes reward-pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:560px){
+ .reward-fab{right:16px;bottom:72px;width:44px;height:44px;font-size:16px}
+ .reward-overlay{padding:14px}
+ .reward-panel{padding:22px 18px 18px;border-radius:12px}
+ .reward-panel h2{font-size:21px}
+ .reward-tabs{display:flex;gap:6px;margin:0 0 12px;padding:4px;border-radius:99px;background:var(--soft)}
+ .reward-tab{flex:1;min-height:36px;border:0;border-radius:99px;background:transparent;color:var(--muted);font:600 13px var(--sans);cursor:pointer}
+ .reward-tab[aria-selected="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 4px rgba(29,29,27,.1)}
+ .reward-codes{grid-template-columns:1fr}
+ .reward-code{display:none}
+ .reward-code.active{display:block}
+ .reward-code img{max-width:250px}
+}

@@ -8,6 +8,7 @@ const activeAbout = currentPath.startsWith('about/');
 const activeTitle = page.title ? `${page.title} | Lino笔记` : 'Lino笔记 — 技术笔记与日常记录';
 const activeDescription = page.description || page.summary || config.description;
 const footerCopy = site.data.footer;
+const rewardCopy = site.data.reward;
 %><!doctype html>
 <html lang="zh-CN">
 <head>
@@ -65,5 +66,31 @@ const footerCopy = site.data.footer;
     </div>
   </footer>
   <button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部">↑</button>
+<% if (rewardCopy) { %>
+  <button class="reward-fab" id="reward-fab" type="button" aria-haspopup="dialog" aria-controls="reward-dialog" aria-label="<%= rewardCopy.buttonLabel %>" title="<%= rewardCopy.buttonLabel %>"><span aria-hidden="true"><%= rewardCopy.buttonText %></span></button>
+  <div class="reward-overlay" id="reward-dialog" role="dialog" aria-modal="true" aria-labelledby="reward-title" hidden>
+    <div class="reward-panel" tabindex="-1">
+      <button class="reward-close" type="button" data-reward-close aria-label="关闭">×</button>
+      <p class="reward-kicker">SUPPORT ✳︎</p>
+      <h2 id="reward-title"><%= rewardCopy.title %></h2>
+      <p class="reward-message"><%= rewardCopy.message %></p>
+      <div class="reward-tabs" role="tablist" aria-label="选择收款方式">
+        <button class="reward-tab" type="button" role="tab" id="reward-tab-wechat" aria-controls="reward-pane-wechat" aria-selected="true" data-reward-tab="wechat"><%= rewardCopy.wechatLabel %></button>
+        <button class="reward-tab" type="button" role="tab" id="reward-tab-alipay" aria-controls="reward-pane-alipay" aria-selected="false" data-reward-tab="alipay"><%= rewardCopy.alipayLabel %></button>
+      </div>
+      <div class="reward-codes">
+        <figure class="reward-code is-wechat active" id="reward-pane-wechat" role="tabpanel" aria-labelledby="reward-tab-wechat" data-reward-pane="wechat">
+          <img width="694" height="674" alt="<%= rewardCopy.wechatLabel %>收款码" data-src="<%- versioned_asset('assets/reward/wechat-pay.png') %>" decoding="async">
+          <figcaption><span class="reward-dot" aria-hidden="true"></span><%= rewardCopy.wechatLabel %></figcaption>
+        </figure>
+        <figure class="reward-code is-alipay" id="reward-pane-alipay" role="tabpanel" aria-labelledby="reward-tab-alipay" data-reward-pane="alipay">
+          <img width="702" height="720" alt="<%= rewardCopy.alipayLabel %>收款码" data-src="<%- versioned_asset('assets/reward/alipay.png') %>" decoding="async">
+          <figcaption><span class="reward-dot" aria-hidden="true"></span><%= rewardCopy.alipayLabel %></figcaption>
+        </figure>
+      </div>
+      <p class="reward-note"><%= rewardCopy.note %></p>
+    </div>
+  </div>
+<% } %>
 </body>
 </html>
