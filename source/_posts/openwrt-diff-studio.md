@@ -1,10 +1,10 @@
 ---
 title: "OpenWrt Diff Studio：在手机上给 OpenWrt 做差异更新"
-date: "2026-10-24 20:10:00"
+date: "2026-10-24 00:00:00"
 slug: "openwrt-diff-studio"
 permalink: "posts/openwrt-diff-studio/"
 summary: "电脑版 OpenWrt Diff Studio 的安卓移植：在手机上比较两版完整发行包，生成只含变更文件的差异包，再通过 SSH 直接更新设备，配置、额外插件和用户数据都保留。"
-read: "5 分钟"
+read: "8 分钟"
 layout: post
 tags:
   - "OpenWrt"
@@ -14,6 +14,7 @@ description: "电脑版 OpenWrt Diff Studio 的安卓移植：在手机上生成
 categories:
   - 工具
 ---
+
 # OpenWrt Diff Studio：在手机上给 OpenWrt 做差异更新
 
 给 E5、MU300 这类设备装上 OpenWrt 以后，新版发行包隔一段时间就会出一版。想升级的话，最省事的办法是重新完整安装一遍，但这样配置要重配，自己装的插件要重装，等于从头来过。
@@ -126,8 +127,6 @@ App 分成两页，各管一件事。
 
 ## 下载
 
-GitHub——[下载 OpenWrt Diff Studio（安卓版）](https://github.com/linote99/openwrt-diff-studio-android/releases/tag/v1.0.3)
-
-仓库（含源码、更新日志与第三方声明）——[linote99/openwrt-diff-studio-android](https://github.com/linote99/openwrt-diff-studio-android)
+GitHub——[下载 OpenWrt Diff Studio（安卓版）](https://pan.quark.cn/s/67c237e5b17b)
 
 App 自身源码采用 MIT License；ext4 读取部分（`Ext4.java`）采用 AGPL-3.0-or-later，因此 APK 整体按 AGPL-3.0 分发。设备端运行时文件来自电脑版 OpenWrt Diff Studio，版权归原作者。
