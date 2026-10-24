@@ -1,10 +1,10 @@
 ---
 title: "OpenWrt 安装器（安卓版）：不用电脑，用手机给设备刷 OpenWrt"
-date: "2026-10-24 20:00:00"
+date: "2026-10-24 00:00:00"
 slug: "openwrt-android-installer"
 permalink: "posts/openwrt-android-installer/"
 summary: "从各机型「OpenWrt 一键刷入包」移植来的手机版安装器：在手机上选好完整安装包，校验后调用包内自带的设备端脚本完成安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）三种连接，E5 系列和 MU300 都能装到 TF 卡或内置存储。"
-read: "7 分钟"
+read: "15 分钟"
 layout: post
 tags:
   - "OpenWrt"
@@ -14,6 +14,7 @@ description: "手机版 OpenWrt 安装器：校验完整安装包后调用包内
 categories:
   - 工具
 ---
+
 # OpenWrt 安装器（安卓版）：不用电脑，用手机给设备刷 OpenWrt
 
 E5、MU300 这些设备的 OpenWrt 一键刷入包，原本都要配一台电脑：电脑端安装器负责校验安装包、推送文件、调用设备上的脚本。可很多时候手边只有手机，为了刷个机专门去开电脑，挺麻烦的。
@@ -22,6 +23,7 @@ E5、MU300 这些设备的 OpenWrt 一键刷入包，原本都要配一台电脑
 
 它既能给手机自己装（如果手机本身就是目标设备），也能把手机当「遥控器」，通过 USB 线或局域网给另一台设备装。比如用畅行60 给 E5 刷机。
 
+![安装器界面](https://www.linote.top/images/2026/10/1000026528-44051d.jpg)
 ## 三种连接方式
 
 | 连接方式 | 怎么连 | 手机要 root 吗 |
@@ -191,6 +193,6 @@ APK 的「清理暂存文件」只删它自己暂存的内容。
 
 ## 下载
 
-GitHub——[下载 OpenWrt 安装器（安卓版）](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.4.0)
+觉得对你有用的话，可以点击赞赏按钮打赏我，谢谢
 
-仓库（含源码、构建与测试说明）——[linote99/openwrt-android-installer](https://github.com/linote99/openwrt-android-installer)
+夸克网盘——[下载 OpenWrt 安装器（安卓版）](https://pan.quark.cn/s/369dc64115ef)
