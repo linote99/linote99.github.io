@@ -195,4 +195,4 @@ APK 的「清理暂存文件」只删它自己暂存的内容。
 
 觉得对你有用的话，可以点击赞赏按钮打赏我，谢谢
 
-夸克网盘——[下载 OpenWrt 安装器（安卓版）](https://pan.quark.cn/s/369dc64115ef)
+夸克网盘——[下载 OpenWrt 安装器（安卓版）](https://pan.quark.cn/s/ef598b91c17b)
