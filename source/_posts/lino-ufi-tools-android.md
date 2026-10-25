@@ -76,7 +76,7 @@ layout: post
 
 应用包名为 `top.linote.ufiinstaller`，需要 Android 8.0 及以上。安装包使用自签名证书，需要允许从此来源安装。
 
-**下载：** [GitHub Releases：Lino-UFI-Tools-Android-1.2.1.apk](https://github.com/linote99/lino-ufi-tools-android/releases/tag/v1.2.1)
+**下载：** 夸克网盘——[下载 Lino-UFI工具](https://pan.quark.cn/s/f85333d4edbf)
 
 SHA-256：`a120c0c1f3b2009f891c6ab29576527db55f1b696238666776f0e71940f810ba`
 
