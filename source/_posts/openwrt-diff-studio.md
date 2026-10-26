@@ -82,6 +82,5 @@ categories:
 
 夸克网盘——[下载 OpenWrt Diff Studio（安卓版）](https://pan.quark.cn/s/a38d232efa44)
 
-源码仓库（含源码、更新日志与第三方声明）——[linote99/openwrt-diff-studio-android](https://github.com/linote99/openwrt-diff-studio-android)
 
 App 自身源码采用 MIT License；ext4 读取部分（`Ext4.java`）采用 AGPL-3.0-or-later，因此 APK 整体按 AGPL-3.0 分发。设备端运行时文件来自电脑版 OpenWrt Diff Studio，版权归原作者。
