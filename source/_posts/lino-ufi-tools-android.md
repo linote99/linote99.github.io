@@ -1,19 +1,20 @@
 ---
 title: "Lino-UFI工具：用安卓手机一键安装 UFI-TOOLS"
-date: "2026-10-25 23:30:00"
-description: "介绍 Lino-UFI工具 1.2.1：手机作为 ADB 主机，一键为随身 WiFi 安装 UFI-TOOLS，并提供 ADB 投屏和安装包备份/恢复。"
-summary: "介绍 Lino-UFI工具 1.2.1：手机作为 ADB 主机，一键为随身 WiFi 安装 UFI-TOOLS，并提供 ADB 投屏和安装包备份/恢复。"
-categories:
-  - 工具
-tags:
-  - Android
-  - UFI-TOOLS
-  - ADB
+date: "2026-10-25 00:00:00"
 slug: "lino-ufi-tools-android"
 permalink: "posts/lino-ufi-tools-android/"
+summary: "介绍 Lino-UFI工具 1.2.1：手机作为 ADB 主机，一键为随身 WiFi 安装 UFI-TOOLS，并提供 ADB 投屏和安装包备份/恢复。"
 read: "6 分钟"
 layout: post
+tags:
+  - "Android"
+  - "UFI-TOOLS"
+  - "ADB"
+description: "介绍 Lino-UFI工具 1.2.1：手机作为 ADB 主机，一键为随身 WiFi 安装 UFI-TOOLS，并提供 ADB 投屏和安装包备份/恢复。"
+categories:
+  - 工具
 ---
+
 # Lino-UFI工具：用安卓手机一键安装 UFI-TOOLS
 
 我把 UFI-TOOLS 电脑版「一键安装器 1.9.2」（Windows）的流程移植到了 Android，做成了 **Lino-UFI工具**。手机本身就是 ADB 主机：连上随身 WiFi 的热点，点一下按钮，就能完成开启 ADB、安装、授权、保活设置、启动和重启设备，不需要电脑。
@@ -80,7 +81,6 @@ layout: post
 
 SHA-256：`a120c0c1f3b2009f891c6ab29576527db55f1b696238666776f0e71940f810ba`
 
-**源码：** [linote99/lino-ufi-tools-android](https://github.com/linote99/lino-ufi-tools-android)（MIT License）
 
 ## 当前状态
 
