@@ -3,14 +3,14 @@ title: "OpenWrt 安装器（安卓版）：不用电脑，用手机给设备刷 
 date: "2026-10-24 00:00:00"
 slug: "openwrt-android-installer"
 permalink: "posts/openwrt-android-installer/"
-summary: "从各机型「OpenWrt 一键刷入包」移植来的手机版安装器：在手机上选好完整安装包，校验后调用包内自带的设备端脚本完成安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）三种连接，E5 系列和 MU300 都能装到 TF 卡或内置存储，userdata 已加密或空间不够时还能格式化 userdata 后安装。"
+summary: "从各机型「OpenWrt 一键刷入包」移植来的手机版安装器：在手机上选好完整安装包，校验后调用包内自带的设备端脚本完成安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）三种连接；v1.7.6 起新增畅行60（ZTE 7552N / P720S20）专用包目标机型，并支持 E5 系列和 MU300。"
 read: "15 分钟"
 layout: post
 tags:
   - "OpenWrt"
   - "Android"
   - "刷机"
-description: "手机版 OpenWrt 安装器：校验完整安装包后调用包内自带脚本安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）；E5 系列和 MU300 支持 TF 卡、独立内置分区（含格式化 userdata 后的两阶段安装）、重装已有内置分区和 userdata 镜像，也能卸载 OpenWrt 并把空间还给 Android。"
+description: "手机版 OpenWrt 安装器：校验完整安装包后调用包内自带脚本安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）；v1.7.6 起支持畅行60专用包（仅 ZTE 7552N / P720S20），并支持 E5 系列和 MU300。"
 categories:
   - 工具
 ---
@@ -21,6 +21,10 @@ E5、MU300 这些设备的 OpenWrt 一键刷入包，原本都要配一台电脑
 这个 APK 就是把电脑端安装器搬到了手机上。在手机上选好完整安装包 ZIP，APK 先校验、再提取安装文件，然后调用**安装包自带的设备端脚本**完成安装，全程不需要电脑。
 
 它既能给手机自己装（如果手机本身就是目标设备），也能把手机当「遥控器」，通过 USB 线或局域网给另一台设备装。比如用畅行60 给 E5 刷机。
+
+> **v1.7.6 更新：**畅行60现在也可作为目标机型，但仅限专用 `changxing60` 固件包，并且设备 Android 型号必须为 `ZTE 7552N`、主板必须为 `P720S20`；型号、主板或包 profile 不匹配时会拒绝安装。畅行60仍可作为遥控手机操作其他受支持设备。
+>
+> **安装提醒：**v1.7.6 APK 使用与 v1.7.5 相同的新签名，不能直接覆盖旧正式签名版。安装前先备份重要数据并卸载旧版；卸载可能清除本应用保存的数据。
 
 ![安装器界面](https://www.linote.top/images/2026/10/1000026528-44051d.jpg)
 
@@ -82,6 +86,7 @@ USB 和局域网方式下，安装文件先推送到目标设备的 `/data/local
 |---|---|---|
 | E5 | E5 | `192.168.9.1` |
 | 远航41S | ZTE 7546N，主板 P720S11 | `192.168.9.1` |
+| Changxing60（畅行60） | ZTE 7552N，主板 P720S20 | `192.168.9.1` |
 | T551M | T551M | `192.168.9.1` |
 | T512N | T512N | `192.168.9.1` |
 | VIPME M8 | VIPME M8 | `192.168.9.1` |
@@ -92,9 +97,9 @@ USB 和局域网方式下，安装文件先推送到目标设备的 `/data/local
 
 E5、T551M、M8、K1 要求 bootloader 是 orange（已解锁）状态；远航41S、T512N、MU300 不要求。
 
-前 6 种结构和 E5 相同，设备端脚本逐字节一致，我统称为 E5 系列。MU300 的安装包结构完全不同，APK 单独做了适配。
+E5、远航41S、T551M、T512N、VIPME M8 和 angelcare K1 属于 E5 系列，安装包由各自设备端脚本完成操作；Changxing60 使用专用 profile 并严格校验型号和主板。MU300 的安装包结构完全不同，APK 单独做了适配。
 
-有一点要特别说清楚：拿畅行60 当「遥控器」给这些设备刷机，可以；但**把这些包刷进畅行60 本身不可以**，它不在任何一个包的支持列表里，也不要强行这么做。
+畅行60既可以当「遥控器」通过 USB 或局域网给其他受支持设备刷机，也从 v1.7.6 起支持作为目标设备安装其专用固件包。不要把其他机型的安装包刷进畅行60；专用包也只接受 `ZTE 7552N`、主板 `P720S20` 的匹配设备。
 
 ## E5 系列的安装方式
 
@@ -315,6 +320,10 @@ OpenWrt 的在线更新，目前请继续用电脑端安装器。
 - 全新安装后的登录用户名 `root`，密码 `root`。
 
 ## 下载
+
+**v1.7.6 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.7.6) · [APK](https://github.com/linote99/openwrt-android-installer/releases/download/v1.7.6/OpenWrt-Installer-Android-1.7.6.apk) · [源码 ZIP](https://github.com/linote99/openwrt-android-installer/releases/download/v1.7.6/OpenWrt-Installer-Android-1.7.6-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-android-installer)
+
+APK SHA-256：`dd1a4c7b6a672efb6091e151c4d2170cc23bf4771118010155180b43f2e8f8ff`；源码 ZIP SHA-256：`204161e4a70643b4671411697622dfb7d6992295d31a5ad6a308cec77aebccb3`。签名证书 SHA-256：`84895da2db82cae13497c93d92697841df13f57bb3924add0bc69ab9e3bf4f31`。
 
 觉得对你有用的话，可以点击赞赏按钮打赏我，谢谢
 
