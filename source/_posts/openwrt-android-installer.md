@@ -3,14 +3,14 @@ title: "OpenWrt 安装器（安卓版）：不用电脑，用手机给设备刷 
 date: "2026-10-24 00:00:00"
 slug: "openwrt-android-installer"
 permalink: "posts/openwrt-android-installer/"
-summary: "从各机型「OpenWrt 一键刷入包」移植来的手机版安装器：在手机上选好完整安装包，校验后调用包内自带的设备端脚本完成安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）三种连接；v1.7.6 起新增畅行60（ZTE 7552N / P720S20）专用包目标机型，并支持 E5 系列和 MU300。"
+summary: "手机版 OpenWrt 安装器：v1.8.3 起受限支持 U30 Pro（MU5358 / UMS9632）内置安装；不格式化 userdata，但尚未在真实 U30 Pro 上验证。"
 read: "15 分钟"
 layout: post
 tags:
   - "OpenWrt"
   - "Android"
   - "刷机"
-description: "手机版 OpenWrt 安装器：校验完整安装包后调用包内自带脚本安装，支持本机、USB 有线（OTG）和局域网（无线 ADB）；v1.7.6 起支持畅行60专用包（仅 ZTE 7552N / P720S20），并支持 E5 系列和 MU300。"
+description: "OpenWrt 安卓安装器 v1.8.3：新增 U30 Pro（MU5358 / UMS9632）受限内置安装，不格式化 userdata；本地合成测试通过，未在真机验证。"
 categories:
   - 工具
 ---
@@ -22,9 +22,11 @@ E5、MU300 这些设备的 OpenWrt 一键刷入包，原本都要配一台电脑
 
 它既能给手机自己装（如果手机本身就是目标设备），也能把手机当「遥控器」，通过 USB 线或局域网给另一台设备装。比如用畅行60 给 E5 刷机。
 
-> **v1.7.6 更新：**畅行60现在也可作为目标机型，但仅限专用 `changxing60` 固件包，并且设备 Android 型号必须为 `ZTE 7552N`、主板必须为 `P720S20`；型号、主板或包 profile 不匹配时会拒绝安装。畅行60仍可作为遥控手机操作其他受支持设备。
+> **v1.8.3 更新：**修复「卸载 OpenWrt」按钮闪退，并为 U30 Pro（MU5358 / UMS9632）增加受限的内置安装支持。U30 Pro 只开放安全未分配空间新建分区，或在条件满足时保留 Android 数据、离线缩小 userdata 后安装这两条路径。
 >
-> **安装提醒：**v1.7.6 APK 使用与 v1.7.5 相同的新签名，不能直接覆盖旧正式签名版。安装前先备份重要数据并卸载旧版；卸载可能清除本应用保存的数据。
+> **U30 Pro 重要限制：**不会格式化 userdata；userdata 加密或状态未知、空间不足、设备身份不匹配，或提出格式化请求时都会拒绝。此机型不支持 TF 卡、Magisk 安装方式或通用 MU300 写入路径。U30 Pro 尚未连接真机验证，也未执行固件 ZIP 中的脚本或二进制；本地合成测试通过不等于实机验证或无风险保证。
+>
+> **升级提醒：**不同签名的旧 APK（包括原正式签名版）不能直接覆盖 v1.8.3。跨签名迁移前先备份必要数据，再卸载旧版后安装；卸载可能清除本应用保存的数据。v1.8.3 的 versionCode 为 35，最低支持 Android 8.0。
 
 ![安装器界面](https://www.linote.top/images/2026/10/1000026528-44051d.jpg)
 
@@ -92,8 +94,9 @@ USB 和局域网方式下，安装文件先推送到目标设备的 `/data/local
 | VIPME M8 | VIPME M8 | `192.168.9.1` |
 | angelcare K1 | angelcare K1，主板 ums9157_2h10 | `192.168.9.1` |
 | MU300（内核 7.2.8 和 6.18.54 两个包） | ZTE F50 / MU300 / U30 Air，或 V50 / MU3351（UMS9620 平台） | `192.168.77.1` |
+| U30 Pro（MU5358 / UMS9632） | 仅限匹配的 U30 Pro 设备与对应安装包；受限支持见下文 | 按对应固件设置 |
 
-所有机型都支持这几种安装方式：TF 卡、独立内置分区（包括格式化 userdata 后安装）、重装已有内置分区、userdata 镜像。后两种属于高级功能，默认隐藏。高级功能里还有「卸载并归还空间」，可以把装到内置存储的 OpenWrt 删掉，空间还给 Android。
+各机型可用的安装方式不同，不能把任一种方式当成所有机型通用。E5 系列和 MU300 的方式见各自章节；v1.8.3 新增的 U30 Pro 仅支持下文列出的两种不格式化 userdata 的内置安装路径。重装已有内置分区、userdata 镜像和卸载并归还空间等功能，也只适用于相应支持机型。
 
 E5、T551M、M8、K1 要求 bootloader 是 orange（已解锁）状态；远航41S、T512N、MU300 不要求。
 
@@ -142,6 +145,21 @@ MU300 除了 TF 卡，也可以装到内置存储。内置存储这几种方式�
 - **不把「看起来空」的空间当空闲。** 未分配空间里如果还残留着旧的文件系统，不会拿来用。
 - **检查结果过期就重来。** 比如只读检查时未分配空间还够，真正开始时已经不够了，会在备份和写入之前中止，要求重新检查。
 - **只读检查会确认**机型（F50 / MU300 / U30 Air / V50）、当前槽位、userdata 的加密状态和文件系统、eMMC 未分配空间，并算出每条路径（未分配空间 / 保留数据缩容 / 格式化 userdata）各自可选的大小。
+
+## U30 Pro（MU5358 / UMS9632）：v1.8.3 受限支持
+
+U30 Pro 使用专门的设备识别和固件包校验，只支持以下两种内置安装路径；这不是通用 MU300 安装流程：
+
+| 路径 | 条件 | 对数据的影响 |
+|---|---|---|
+| 安全未分配空间中新建分区 | 至少 2 GiB 安全未分配空间，且设备身份、GPT 与空间检查通过 | 在该空间新建 OpenWrt 分区并安装；不格式化 userdata |
+| 保留数据的 userdata 缩容 | userdata 明确未加密，且文件系统、几何与容量检查通过；仅适配 ext4 / F2FS | 离线缩小 userdata，保留 Android 数据后安装 |
+
+userdata 加密或状态未知、身份不匹配、空间不足或任何格式化请求都会被拒绝。U30 Pro 不支持 TF 卡、Magisk 安装方式或通用 MU300 写入路径；目前只适配 Android boot v4 / AVB 样本启动链，涉及 `boot`、`vendor_boot`、`init_boot` 和 `dtbo`。
+
+界面中的「userdata 空闲空间扫描【高级】」只是只读检查和相邻空闲空间预览，不会修改 GPT 或文件系统。单独的 Android userdata 扩容写入流程尚未实现，不能把扫描预览当作扩容功能。请注意，这与上面两种会执行 OpenWrt 安装写入的路径是不同功能。
+
+本地回归与合成测试通过（U30 Pro 有 48 项合成设备流程和 49 项适配器检查）；未连接真实 U30 Pro，也未执行固件 ZIP 内脚本或二进制。E5 / MU300 卸载集成测试因缺少固件夹具而跳过。测试结果不代表真机验证，也不是无风险保证。
 
 ## 格式化 userdata 后安装：两阶段
 
@@ -313,6 +331,7 @@ OpenWrt 的在线更新，目前请继续用电脑端安装器。
 - 目标设备：已 root，并且是上面「支持的机型」表里的机型。
 - E5 系列（E5、远航41S、T551M、T512N、M8、K1）：支持 TF 卡、独立内置分区（缩容 userdata，或格式化 userdata 后安装）、重装已有内置分区和 userdata 镜像，管理地址 `192.168.9.1`。
 - MU300（内核 7.2.8 和 6.18.54 两个包）：支持 TF 卡、独立内置分区（未分配空间、缩容 userdata，或格式化 userdata 后安装）、重装已有内置分区和 userdata 镜像，管理地址 `192.168.77.1`。
+- U30 Pro（MU5358 / UMS9632）：v1.8.3 起受限支持两种内置安装方式（安全未分配空间，或满足条件时保数据缩容）；不支持格式化 userdata、TF 卡、Magisk 安装方式或通用 MU300 写入路径，且尚未真机验证。
 - 保留数据的缩容和 userdata 镜像只支持未加密的 userdata；格式化 userdata 后安装会清空 Android 数据，只能从另一台手机通过 USB / 局域网操作。
 - 卸载并归还空间：E5 系列和 MU300 都支持，只能从另一台手机通过 USB / 局域网操作；OpenWrt 分区紧挨 userdata 时保留 Android 数据，否则释放成未分配空间。
 - 重装已有内置分区、userdata 镜像、卸载并归还空间在高级功能里，连点标题 5 下开启。
@@ -321,9 +340,9 @@ OpenWrt 的在线更新，目前请继续用电脑端安装器。
 
 ## 下载
 
-**v1.7.6 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.7.6) · [APK](https://github.com/linote99/openwrt-android-installer/releases/download/v1.7.6/OpenWrt-Installer-Android-1.7.6.apk) · [源码 ZIP](https://github.com/linote99/openwrt-android-installer/releases/download/v1.7.6/OpenWrt-Installer-Android-1.7.6-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-android-installer)
+**v1.8.3 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.8.3) · [APK](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.3/OpenWrt-Installer-Android-1.8.3.apk) · [源码 ZIP](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.3/OpenWrt-Installer-Android-1.8.3-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-android-installer)
 
-APK SHA-256：`dd1a4c7b6a672efb6091e151c4d2170cc23bf4771118010155180b43f2e8f8ff`；源码 ZIP SHA-256：`204161e4a70643b4671411697622dfb7d6992295d31a5ad6a308cec77aebccb3`。签名证书 SHA-256：`84895da2db82cae13497c93d92697841df13f57bb3924add0bc69ab9e3bf4f31`。
+APK SHA-256：`74070a7fd475b4eada9a679bec3dfa7e090cd207573fcbdb0616585f94931167`；源码 ZIP SHA-256：`ea8a77cc7c14c00177df60e93e88ee5c133f8aa90b307971c2d7b6117237c13b`。
 
 觉得对你有用的话，可以点击赞赏按钮打赏我，谢谢
 
