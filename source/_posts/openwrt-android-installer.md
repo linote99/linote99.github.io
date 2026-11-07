@@ -3,14 +3,14 @@ title: "OpenWrt 安装器（安卓版）：不用电脑，用手机给设备刷 
 date: "2026-10-24 00:00:00"
 slug: "openwrt-android-installer"
 permalink: "posts/openwrt-android-installer/"
-summary: "手机版 OpenWrt 安装器：v1.8.3 起受限支持 U30 Pro（MU5358 / UMS9632）内置安装；不格式化 userdata，但尚未在真实 U30 Pro 上验证。"
+summary: "手机版 OpenWrt 安装器 v1.8.6：新增 F50 Pro（MU3356 / UMS9632）受限适配，版本已完成真机测试；F50 Pro 专项尚未在该机型真机验证。"
 read: "15 分钟"
 layout: post
 tags:
   - "OpenWrt"
   - "Android"
   - "刷机"
-description: "OpenWrt 安卓安装器 v1.8.3：新增 U30 Pro（MU5358 / UMS9632）受限内置安装，不格式化 userdata；本地合成测试通过，未在真机验证。"
+description: "OpenWrt 安卓安装器 v1.8.6：新增 F50 Pro（MU3356 / UMS9632）受限适配，版本已完成真机测试；F50 Pro 专项尚未在该机型真机验证。"
 categories:
   - 工具
 ---
@@ -22,11 +22,13 @@ E5、MU300 这些设备的 OpenWrt 一键刷入包，原本都要配一台电脑
 
 它既能给手机自己装（如果手机本身就是目标设备），也能把手机当「遥控器」，通过 USB 线或局域网给另一台设备装。比如用畅行60 给 E5 刷机。
 
-> **v1.8.3 更新：**修复「卸载 OpenWrt」按钮闪退，并为 U30 Pro（MU5358 / UMS9632）增加受限的内置安装支持。U30 Pro 只开放安全未分配空间新建分区，或在条件满足时保留 Android 数据、离线缩小 userdata 后安装这两条路径。
+> **v1.8.6 更新：**新增独立 F50 Pro（MU3356 / UMS9632）受限适配；只有设备身份、固件标识与文件哈希均严格匹配时，才开放通过校验的受限内部安装路径。具体适配边界以 [v1.8.6 发布说明](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.8.6) 为准。
+>
+> **实机测试：**v1.8.6 已完成真机测试并通过。需要区分的是，发布说明仍注明新增的 F50 Pro 专项尚未在 F50 Pro 真机验证；整版测试通过不代表这一特定机型路径已实测。
 >
 > **U30 Pro 重要限制：**不会格式化 userdata；userdata 加密或状态未知、空间不足、设备身份不匹配，或提出格式化请求时都会拒绝。此机型不支持 TF 卡、Magisk 安装方式或通用 MU300 写入路径。U30 Pro 尚未连接真机验证，也未执行固件 ZIP 中的脚本或二进制；本地合成测试通过不等于实机验证或无风险保证。
 >
-> **升级提醒：**不同签名的旧 APK（包括原正式签名版）不能直接覆盖 v1.8.3。跨签名迁移前先备份必要数据，再卸载旧版后安装；卸载可能清除本应用保存的数据。v1.8.3 的 versionCode 为 35，最低支持 Android 8.0。
+> **升级提醒：**v1.8.6 APK 使用本地签名密钥；与其签名证书不同的旧正式版不能直接覆盖安装。跨签名迁移前先备份必要数据，再卸载旧版后安装；卸载可能清除本应用保存的数据。v1.8.6 的 versionCode 为 38，最低支持 Android 8.0。
 
 ![安装器界面](https://www.linote.top/images/2026/10/1000026528-44051d.jpg)
 
@@ -95,8 +97,9 @@ USB 和局域网方式下，安装文件先推送到目标设备的 `/data/local
 | angelcare K1 | angelcare K1，主板 ums9157_2h10 | `192.168.9.1` |
 | MU300（内核 7.2.8 和 6.18.54 两个包） | ZTE F50 / MU300 / U30 Air，或 V50 / MU3351（UMS9620 平台） | `192.168.77.1` |
 | U30 Pro（MU5358 / UMS9632） | 仅限匹配的 U30 Pro 设备与对应安装包；受限支持见下文 | 按对应固件设置 |
+| F50 Pro（MU3356 / UMS9632） | 独立受限适配；只开放设备身份、固件标识与文件哈希均通过校验的内部安装路径 | 按对应固件设置 |
 
-各机型可用的安装方式不同，不能把任一种方式当成所有机型通用。E5 系列和 MU300 的方式见各自章节；v1.8.3 新增的 U30 Pro 仅支持下文列出的两种不格式化 userdata 的内置安装路径。重装已有内置分区、userdata 镜像和卸载并归还空间等功能，也只适用于相应支持机型。
+各机型可用的安装方式不同，不能把任一种方式当成所有机型通用。E5 系列和 MU300 的方式见各自章节；v1.8.3 新增的 U30 Pro 仅支持下文列出的两种不格式化 userdata 的内置安装路径；v1.8.6 新增的 F50 Pro 则使用独立的受限适配，不能套用通用 MU300 路径。重装已有内置分区、userdata 镜像和卸载并归还空间等功能，也只适用于相应支持机型。
 
 E5、T551M、M8、K1 要求 bootloader 是 orange（已解锁）状态；远航41S、T512N、MU300 不要求。
 
@@ -331,7 +334,8 @@ OpenWrt 的在线更新，目前请继续用电脑端安装器。
 - 目标设备：已 root，并且是上面「支持的机型」表里的机型。
 - E5 系列（E5、远航41S、T551M、T512N、M8、K1）：支持 TF 卡、独立内置分区（缩容 userdata，或格式化 userdata 后安装）、重装已有内置分区和 userdata 镜像，管理地址 `192.168.9.1`。
 - MU300（内核 7.2.8 和 6.18.54 两个包）：支持 TF 卡、独立内置分区（未分配空间、缩容 userdata，或格式化 userdata 后安装）、重装已有内置分区和 userdata 镜像，管理地址 `192.168.77.1`。
-- U30 Pro（MU5358 / UMS9632）：v1.8.3 起受限支持两种内置安装方式（安全未分配空间，或满足条件时保数据缩容）；不支持格式化 userdata、TF 卡、Magisk 安装方式或通用 MU300 写入路径，且尚未真机验证。
+- U30 Pro（MU5358 / UMS9632）：v1.8.3 起受限支持两种内置安装方式（安全未分配空间，或满足条件时保数据缩容）；不支持格式化 userdata、TF 卡、Magisk 安装方式或通用 MU300 写入路径；该机型专项尚未真机验证。
+- F50 Pro（MU3356 / UMS9632）：v1.8.6 起独立受限适配，只开放严格校验通过的内部安装路径。v1.8.6 整版已完成真机测试，但 F50 Pro 专项尚未在该机型真机验证。
 - 保留数据的缩容和 userdata 镜像只支持未加密的 userdata；格式化 userdata 后安装会清空 Android 数据，只能从另一台手机通过 USB / 局域网操作。
 - 卸载并归还空间：E5 系列和 MU300 都支持，只能从另一台手机通过 USB / 局域网操作；OpenWrt 分区紧挨 userdata 时保留 Android 数据，否则释放成未分配空间。
 - 重装已有内置分区、userdata 镜像、卸载并归还空间在高级功能里，连点标题 5 下开启。
@@ -340,9 +344,9 @@ OpenWrt 的在线更新，目前请继续用电脑端安装器。
 
 ## 下载
 
-**v1.8.3 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.8.3) · [APK](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.3/OpenWrt-Installer-Android-1.8.3.apk) · [源码 ZIP](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.3/OpenWrt-Installer-Android-1.8.3-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-android-installer)
+**v1.8.6 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-android-installer/releases/tag/v1.8.6) · [APK](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.6/OpenWrt-Installer-Android-1.8.6.apk) · [源码 ZIP](https://github.com/linote99/openwrt-android-installer/releases/download/v1.8.6/OpenWrt-Installer-Android-1.8.6-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-android-installer)
 
-APK SHA-256：`74070a7fd475b4eada9a679bec3dfa7e090cd207573fcbdb0616585f94931167`；源码 ZIP SHA-256：`ea8a77cc7c14c00177df60e93e88ee5c133f8aa90b307971c2d7b6117237c13b`。
+APK SHA-256：`ae06f0b4e679c0ca28ede113b72de09da26fdc896ef2faf48609628413a74688`；源码 ZIP SHA-256：`3e5424a8281c84df1a44b2862e3656402b53b4886db1a2eecadbc7f9332c8d7b`。
 
 觉得对你有用的话，可以点击赞赏按钮打赏我，谢谢
 

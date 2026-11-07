@@ -3,14 +3,14 @@ title: "OpenWrt Diff Studio 安卓版：在手机上生成差异包并更新设�
 date: "2026-10-24 00:00:00"
 slug: "openwrt-diff-studio"
 permalink: "posts/openwrt-diff-studio/"
-summary: "介绍 OpenWrt Diff Studio 安卓版 1.1.0：用发行包或版本摘要生成差异包，并通过 SSH 检查和更新 OpenWrt 设备。"
+summary: "OpenWrt Diff Studio 安卓版 v1.1.2：生成并应用 OpenWrt 差异包，已完成真机测试；注意 APK 为 debug 签名，不能覆盖正式签名版。"
 read: "6 分钟"
 layout: post
 tags:
   - "OpenWrt"
   - "Android"
   - "OTA"
-description: "介绍 OpenWrt Diff Studio 安卓版 1.1.0：用发行包或版本摘要生成差异包，并通过 SSH 检查和更新 OpenWrt 设备。"
+description: "OpenWrt Diff Studio 安卓版 v1.1.2：生成并应用 OpenWrt 差异包，已完成真机测试；注意 APK 为 debug 签名，不能覆盖正式签名版。"
 categories:
   - 工具
 ---
@@ -19,7 +19,9 @@ categories:
 
 我把桌面版的 **OpenWrt Diff Studio**（含 Patch Updater）移植到了 Android。它做两件事：比较两版 OpenWrt 发行包，生成只包含变更文件的差异包；再通过 SSH 把差异包应用到正在运行 OpenWrt 的设备上。配置、额外插件和用户数据会保留，不需要每次都刷完整固件。
 
-应用分为两个页签：「生成差异包」和「更新设备」。切到更新页时，顶部标题会显示为 **OpenWrt Updater**。当前版本 1.1.0 同步了 2026-10-26 的电脑版（电脑版现已分为 E5 系列版和 MU300 版两个包）。
+应用分为两个页签：「生成差异包」和「更新设备」。切到更新页时，顶部标题会显示为 **OpenWrt Updater**。当前版本为 **1.1.2**，新增 F50 Pro、U30 Pro、LYM-10K 的差异包文件名映射，并加强 OTA bootstrap 对补丁的核验；此前 1.1.0 加入的版本摘要等功能仍可照常使用。
+
+**真机测试：**v1.1.2 已完成真机测试并通过。GitHub 发布说明中的“未在真实手机或路由器上测试”记录的是发布时状态，后续实机测试已通过。
 
 ## 生成差异包
 
@@ -68,15 +70,19 @@ categories:
 
 ## 安装
 
-应用包名为 `com.linote.diffstudio`，需要 Android 8.0 及以上。安装包使用自签名证书，需要允许从此来源安装；1.1.0 与之前各版本签名相同，可以直接覆盖升级。
+应用包名为 `com.linote.diffstudio`，需要 Android 8.0 及以上。v1.1.2 APK 使用 Android 标准 **debug 签名**，不能覆盖安装到 1.1.1 及更早的正式签名版。迁移前请备份数据并卸载旧版；卸载可能清除应用数据。
 
 第一次给设备装 OpenWrt，可以用另一个工具：[OpenWrt 安装器（安卓版）](/posts/openwrt-android-installer/)。
 
 ## 反馈
 
-当前版本为 **1.1.0**。使用时请按检查结果谨慎操作；遇到问题，欢迎到 [GitHub Issues](https://github.com/linote99/openwrt-diff-studio-android/issues) 反馈具体的设备型号和问题。
+当前版本为 **1.1.2**，已完成真机测试并通过。使用时请按检查结果谨慎操作；遇到问题，欢迎到 [GitHub Issues](https://github.com/linote99/openwrt-diff-studio-android/issues) 反馈具体的设备型号和问题。
 
 ## 下载
+
+**v1.1.2 GitHub 下载：**[Release 页面](https://github.com/linote99/openwrt-diff-studio-android/releases/tag/v1.1.2) · [APK（debug 签名）](https://github.com/linote99/openwrt-diff-studio-android/releases/download/v1.1.2/OpenWrt-Diff-Studio-Android-1.1.2-debug.apk) · [源码 ZIP](https://github.com/linote99/openwrt-diff-studio-android/releases/download/v1.1.2/OpenWrt-Diff-Studio-Android-1.1.2-source.zip) · [源码仓库（main）](https://github.com/linote99/openwrt-diff-studio-android)
+
+APK SHA-256：`154e2ea7c74ed77e68e351435dfabf8bea7a4b5be4243a6c3a1cf321c29c357f`；源码 ZIP SHA-256：`e0cd9a6dc158f20b9907dff3049265b579e5d7b2faeff6d134450fb489226548`。
 
 觉得对你有用的话，可以点击赞赏按钮给我打赏，谢谢！
 
