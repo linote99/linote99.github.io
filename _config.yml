@@ -36,6 +36,20 @@ archive_generator:
 tag_generator:
   per_page: 0
 
+feed:
+  enable: true
+  type:
+    - atom
+    - rss2
+  path:
+    - atom.xml
+    - rss2.xml
+  limit: 20
+  content: false
+  content_limit: 140
+  order_by: -date
+  autodiscovery: false
+
 marked:
   breaks: false
   smartypants: false

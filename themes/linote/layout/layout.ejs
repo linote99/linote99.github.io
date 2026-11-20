@@ -23,6 +23,8 @@ const rewardCopy = site.data.reward;
   <meta property="og:url" content="<%- config.url %><%- url_for(page.path) %>">
   <title><%= activeTitle %></title>
   <link rel="icon" type="image/png" href="<%- url_for('/assets/linote-logo.png') %>">
+  <link rel="alternate" type="application/rss+xml" title="Lino笔记 RSS 订阅" href="<%- url_for('/rss2.xml') %>">
+  <link rel="alternate" type="application/atom+xml" title="Lino笔记 Atom 订阅" href="<%- url_for('/atom.xml') %>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -59,6 +61,7 @@ const rewardCopy = site.data.reward;
         <a href="<%- url_for('/privacy/') %>"><%= footerCopy.privacyLinkLabel %></a>
         <a href="<%- url_for('/tags/') %>"><%= footerCopy.tagsLinkLabel %></a>
         <a href="<%- url_for('/links/') %>"><%= footerCopy.friendsLinkLabel %></a>
+        <a href="<%- url_for('/rss2.xml') %>">RSS 订阅</a>
       </div>
     </div>
     <div class="footer-bottom">
