@@ -65,7 +65,7 @@ const rewardCopy = site.data.reward;
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (footerCopy.customLine) { %> · <%= footerCopy.customLine %><% } %></span>
+      <span>© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (footerCopy.customLine) { %> · <%- footerCopy.customLine %><% } %></span>
       <span><%= footerCopy.bottomLine %> <span class="footer-star">✳︎</span></span>
     </div>
   </footer>
