@@ -40,7 +40,7 @@ function formatSiteDate(value) {
 hexo.extend.generator.register('linote-search-index', function (locals) {
   const posts = toArray(locals.posts)
     .filter((post) => post && post.published !== false)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .sort((a, b) => Number(Boolean(b.top)) - Number(Boolean(a.top)) || new Date(b.date) - new Date(a.date))
     .map((post) => {
       const tags = toArray(post.tags).map((tag) => ({
         name: String(tag.name || tag),

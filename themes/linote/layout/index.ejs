@@ -1,5 +1,7 @@
 <%
-const posts = site.posts.sort('date', -1).toArray();
+const posts = site.posts.toArray().sort((left, right) =>
+  Number(Boolean(right.top)) - Number(Boolean(left.top)) || new Date(right.date) - new Date(left.date)
+);
 const tags = site.tags.sort('name').toArray();
 const homeCopy = site.data.home;
 %><section class="hero fade-in" aria-labelledby="hero-title">
