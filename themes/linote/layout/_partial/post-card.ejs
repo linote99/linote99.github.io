@@ -1,6 +1,9 @@
 <%
 const postTags = post.tags && typeof post.tags.toArray === 'function' ? post.tags.toArray() : [];
-const summary = post.summary || strip_html(post.excerpt || post.content || '').slice(0, 180);
+const isProtected = post.password_protected === true || String(post.password_protected).toLowerCase() === 'true';
+const summary = isProtected
+  ? (post.summary || '此文章受密码保护，输入密码后可阅读。')
+  : (post.summary || strip_html(post.excerpt || post.content || '').slice(0, 180));
 %><article class="post-card">
   <time class="post-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
   <div class="post-body">

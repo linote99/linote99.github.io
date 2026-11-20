@@ -1,12 +1,35 @@
 <%
 const tags = page.tags && typeof page.tags.toArray === 'function' ? page.tags.toArray() : [];
 const readLabel = page.read || '';
+const isProtected = page.password_protected === true || String(page.password_protected).toLowerCase() === 'true';
+const articleDeck = isProtected ? (page.summary || '') : (page.summary || page.excerpt || '');
+const protectedMatch = isProtected ? String(page.content || '').match(/<div\s+class=["']linote-encrypted-post["'][^>]*><\/div>/i) : null;
+const encryptedMarkup = protectedMatch ? protectedMatch[0] : '';
+const attrs = {};
+if (encryptedMarkup) ['version', 'salt', 'ciphertext'].forEach((name) => {
+  const match = encryptedMarkup.match(new RegExp("data-" + name + "=[\\\"']([^\\\"']+)[\\\"']", 'i'));
+  if (match) attrs[name] = match[1];
+});
 %><article class="article-wrap fade-in">
   <div class="breadcrumbs"><a href="<%- url_for('/') %>">首页</a> / <a href="<%- url_for('/archives/') %>">笔记</a> / <%= page.title %></div>
   <div class="article-meta"><%= date(page.date, 'YYYY.MM.DD') %> &nbsp;·&nbsp; <%= readLabel %>阅读</div>
   <h1 class="article-title"><%= page.title %></h1>
-  <p class="article-deck"><%= page.summary || page.excerpt || '' %></p>
+  <p class="article-deck"><%= articleDeck %></p>
   <div class="article-tags"><% tags.forEach((tag) => { %><a class="post-tag" href="<%- url_for(tag.path) %>"><%= tag.name %></a><% }); %></div>
+  <% if (isProtected) { %>
+  <div class="article-content protected-content" data-protected-content hidden></div>
+  <section class="protected-card" data-protected-post aria-label="密码保护文章" data-version="<%= attrs.version %>" data-salt="<%= attrs.salt %>" data-ciphertext="<%= attrs.ciphertext %>">
+    <p class="protected-kicker">PRIVATE NOTE</p>
+    <h2>这篇文章需要密码</h2>
+    <p>输入密码后，文章内容只会在你的浏览器本地解密。</p>
+    <form data-protected-form>
+      <label class="protected-label" for="protected-password">文章密码</label>
+      <div class="protected-controls"><input id="protected-password" data-protected-password type="password" autocomplete="off" required><button type="submit">解锁文章</button></div>
+      <p class="protected-error" data-protected-error role="alert" hidden></p>
+    </form>
+  </section>
+  <% } else { %>
   <div class="article-content"><%- page.content %></div>
+  <% } %>
   <div class="article-end"><span>记录于 Lino笔记。</span><a class="back-link" href="<%- url_for('/') %>">← 回到首页</a></div>
 </article>

@@ -28,6 +28,7 @@ const rewardCopy = site.data.reward;
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
   <script defer src="<%- url_for('/js/main.js') %>"></script>
+  <script defer src="<%- url_for('/js/protected-post.js') %>"></script>
 </head>
 <body data-root="<%= config.root %>">
   <header class="site-header">
@@ -61,7 +62,7 @@ const rewardCopy = site.data.reward;
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"><%= new Date().getFullYear() %></span> Lino笔记</span>
+      <span>© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (footerCopy.customLine) { %> · <%= footerCopy.customLine %><% } %></span>
       <span><%= footerCopy.bottomLine %> <span class="footer-star">✳︎</span></span>
     </div>
   </footer>

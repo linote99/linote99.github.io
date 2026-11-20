@@ -42,12 +42,15 @@ hexo.extend.generator.register('linote-search-index', function (locals) {
     .filter((post) => post && post.published !== false)
     .sort((a, b) => Number(Boolean(b.top)) - Number(Boolean(a.top)) || new Date(b.date) - new Date(a.date))
     .map((post) => {
+      const isProtected = post.password_protected === true || String(post.password_protected).toLowerCase() === 'true';
       const tags = toArray(post.tags).map((tag) => ({
         name: String(tag.name || tag),
         path: String(tag.path || '')
       }));
-      const content = plainText(post.content || post._content || '');
-      const summary = plainText(post.summary || post.excerpt || content).slice(0, 500);
+      const content = isProtected ? '' : plainText(post.content || post._content || '');
+      const summary = isProtected
+        ? plainText(post.summary || '此文章受密码保护，输入密码后可阅读。').slice(0, 500)
+        : plainText(post.summary || post.excerpt || content).slice(0, 500);
       return {
         slug: String(post.slug || ''),
         title: String(post.title || ''),
@@ -56,7 +59,7 @@ hexo.extend.generator.register('linote-search-index', function (locals) {
         read: String(post.read || ''),
         tags,
         path: String(post.path || ''),
-        text: `${post.title || ''} ${summary} ${tags.map((tag) => tag.name).join(' ')} ${content}`
+        text: `${post.title || ''} ${summary} ${tags.map((tag) => tag.name).join(' ')}`
       };
     });
 
