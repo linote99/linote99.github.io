@@ -12,5 +12,6 @@
   "friendsLinkLabel": "友情链接",
   "bottomLine": "用好奇心记录世界",
   "sitePvLabel": "总访问量",
-  "siteUvLabel": "总访客数"
+  "siteUvLabel": "总访客数",
+  "visitorStatsHtml": "<div class=\"footer-stats\" id=\"footer-stats\" aria-label=\"网站访问统计\" aria-live=\"polite\" hidden>\n  <span id=\"busuanzi_container_site_pv\">总访问量 <span class=\"footer-stat-value\" id=\"busuanzi_value_site_pv\"></span> 次</span>\n  <span class=\"footer-stat-divider\" aria-hidden=\"true\">·</span>\n  <span id=\"busuanzi_container_site_uv\">总访客数 <span class=\"footer-stat-value\" id=\"busuanzi_value_site_uv\"></span> 人</span>\n</div>\n<script async src=\"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js\"></script>\n<script>\n  (function () {\n    var stats = document.getElementById('footer-stats');\n    var target = document.getElementById('busuanzi_container_site_pv') || document.getElementById('busuanzi_container_site_uv');\n    if (!stats || !target) return;\n    var revealWhenReady = function () {\n      if (target.style.display === 'inline') {\n        stats.hidden = false;\n        observer.disconnect();\n        return true;\n      }\n      return false;\n    };\n    var observer = new MutationObserver(revealWhenReady);\n    if (!revealWhenReady()) {\n      observer.observe(target, { attributes: true, attributeFilter: ['style'] });\n    }\n  }());\n</script>"
 }

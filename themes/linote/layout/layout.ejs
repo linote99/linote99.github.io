@@ -9,10 +9,7 @@ const activeTitle = page.title ? `${page.title} | Lino笔记` : 'Lino笔记 — 
 const activeDescription = page.description || page.summary || config.description;
 const footerCopy = site.data.footer;
 const rewardCopy = site.data.reward;
-const footerStatPvLabel = Object.prototype.hasOwnProperty.call(footerCopy, 'sitePvLabel') ? String(footerCopy.sitePvLabel || '').trim() : '总访问量';
-const footerStatUvLabel = Object.prototype.hasOwnProperty.call(footerCopy, 'siteUvLabel') ? String(footerCopy.siteUvLabel || '').trim() : '总访客数';
-const showFooterPv = Boolean(footerStatPvLabel);
-const showFooterUv = Boolean(footerStatUvLabel);
+const visitorStatsHtml = typeof footerCopy.visitorStatsHtml === 'string' ? footerCopy.visitorStatsHtml : '';
 %><!doctype html>
 <html lang="zh-CN">
 <head>
@@ -70,13 +67,7 @@ const showFooterUv = Boolean(footerStatUvLabel);
     </div>
     <div class="footer-bottom">
       <span class="footer-copyright">© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (Array.isArray(footerCopy.customLinks)) { footerCopy.customLinks.forEach(function (link) { if (link && link.text && link.url) { %> · <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.text %></a><% } }); } %></span>
-      <% if (showFooterPv || showFooterUv) { %>
-      <div class="footer-stats" id="footer-stats" aria-label="网站访问统计" aria-live="polite" hidden>
-        <% if (showFooterPv) { %><span id="busuanzi_container_site_pv"><%= footerStatPvLabel %> <span class="footer-stat-value" id="busuanzi_value_site_pv"></span> 次</span><% } %>
-        <% if (showFooterPv && showFooterUv) { %><span class="footer-stat-divider" aria-hidden="true">·</span><% } %>
-        <% if (showFooterUv) { %><span id="busuanzi_container_site_uv"><%= footerStatUvLabel %> <span class="footer-stat-value" id="busuanzi_value_site_uv"></span> 人</span><% } %>
-      </div>
-      <% } %>
+      <%- visitorStatsHtml %>
       <span class="footer-motto"><span class="footer-star">✳︎</span><%= footerCopy.bottomLine %><span class="footer-star">✳︎</span></span>
     </div>
   </footer>
@@ -107,27 +98,5 @@ const showFooterUv = Boolean(footerStatUvLabel);
     </div>
   </div>
 <% } %>
-  <% if (showFooterPv || showFooterUv) { %>
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <script>
-    (function () {
-      var stats = document.getElementById('footer-stats');
-      var target = document.getElementById('busuanzi_container_site_pv') || document.getElementById('busuanzi_container_site_uv');
-      if (!stats || !target) return;
-      var revealWhenReady = function () {
-        if (target.style.display === 'inline') {
-          stats.hidden = false;
-          observer.disconnect();
-          return true;
-        }
-        return false;
-      };
-      var observer = new MutationObserver(revealWhenReady);
-      if (!revealWhenReady()) {
-        observer.observe(target, { attributes: true, attributeFilter: ['style'] });
-      }
-    }());
-  </script>
-  <% } %>
 </body>
 </html>
