@@ -124,7 +124,6 @@ body.reward-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 .friend-avatar-fallback{display:grid;width:100%;height:100%;place-items:center;border-radius:50%;font-size:23px;font-weight:700}
 .friend-avatar img{position:absolute;inset:0;width:100%;height:100%;border:1px solid rgba(29,29,27,.14);border-radius:50%;object-fit:cover;background:var(--soft)}
 .friend-avatar img[hidden]{display:none}
-.friend-status{position:absolute;right:-1px;bottom:0;width:13px;height:13px;border:2px solid var(--paper);border-radius:50%;background:var(--accent)}
 .friend-copy{display:block;min-width:0}
 .friend-name{display:block;overflow:hidden;color:var(--ink);font-size:18px;font-weight:700;line-height:1.5;text-overflow:ellipsis;white-space:nowrap}
 .friend-description{display:-webkit-box;margin-top:3px;overflow:hidden;color:var(--muted);font-size:13px;line-height:1.7;-webkit-box-orient:vertical;-webkit-line-clamp:2}
@@ -152,7 +151,6 @@ body.reward-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden}
  .friend-card{grid-template-columns:54px minmax(0,1fr) 16px;gap:13px;padding:12px;border-radius:11px}
  .friend-avatar{width:54px;height:54px}
  .friend-avatar-fallback{font-size:20px}
- .friend-status{width:12px;height:12px}
  .friend-name{font-size:16px}
  .friend-description{font-size:12px;line-height:1.65}
  .friend-apply{grid-template-columns:1fr;gap:14px;margin-top:27px;padding:20px 16px}
