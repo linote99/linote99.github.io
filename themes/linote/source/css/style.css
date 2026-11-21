@@ -139,7 +139,7 @@ body.reward-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 .friend-site-info dt{color:var(--muted);font-size:11px}
 .friend-site-info dd{min-width:0;margin:0;color:var(--ink);font-size:12px;overflow-wrap:anywhere}
 .friend-site-info a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-.friends-back{margin:25px 0 0;font-size:12px}
+.friends-back{margin:25px 0 0;font-size:15px}
 .friends-back a{color:var(--accent)}
 .friends-back a:hover{color:#9f422c}
 @media(max-width:600px){
