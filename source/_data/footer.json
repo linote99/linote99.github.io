@@ -1,7 +1,11 @@
 {
   "slogan": "把值得记住的事，写下来。",
   "copyrightLabel": "Lino笔记",
-  "customLine": "<a href=\"https://pan.linote.top/\" target=\"_blank\">Lino盘</a> · <a href=\"https://github.com/linote99\" target=\"_blank\">GitHub主页</a> · <a href=\"https://icp.gov.moe/?keyword=20263911\" target=\"_blank\">萌ICP备20263911号</a>",
+  "customLinks": [
+    { "text": "Lino盘", "url": "https://pan.linote.top/" },
+    { "text": "GitHub主页", "url": "https://github.com/linote99" },
+    { "text": "萌ICP备20263911号", "url": "https://icp.gov.moe/?keyword=20263911" }
+  ],
   "aboutLinkLabel": "关于本站",
   "privacyLinkLabel": "使用与隐私",
   "tagsLinkLabel": "浏览标签",

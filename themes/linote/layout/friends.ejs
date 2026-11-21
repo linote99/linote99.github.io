@@ -1,0 +1,54 @@
+<%
+const friendList = Array.isArray(site.data.friends) ? site.data.friends : [];
+const validFriends = friendList.filter((friend) => friend && friend.name && friend.url);
+const defaultFriendAvatar = url_for('/images/default-friend-avatar.jpg');
+%><section class="friends-page fade-in">
+  <div class="friends-inner">
+    <header class="friends-heading">
+      <p class="friends-kicker"><%= page.kicker || 'FRIENDS & LINKS' %></p>
+      <div class="friends-title-row">
+        <h1><%= page.title || '友情链接' %></h1>
+        <span class="friends-count"><%= String(validFriends.length).padStart(2, '0') %> SITES</span>
+      </div>
+      <% if (page.lead) { %><p class="friends-lead"><%= page.lead %></p><% } %>
+    </header>
+
+    <% if (validFriends.length) { %>
+    <div class="friend-list" role="list" aria-label="友情链接列表">
+      <% validFriends.forEach((friend) => { %>
+      <a class="friend-card" href="<%= friend.url %>" target="_blank" rel="noopener noreferrer" role="listitem">
+        <span class="friend-avatar" aria-hidden="true">
+          <span class="friend-avatar-fallback"><%= String(friend.name).trim().slice(0, 1) %></span>
+          <% const avatarUrl = friend.avatar || defaultFriendAvatar; %><img src="<%= avatarUrl %>" alt="" loading="lazy" decoding="async" onerror="this.hidden=true">
+          <span class="friend-status"></span>
+        </span>
+        <span class="friend-copy">
+          <strong class="friend-name"><%= friend.name %></strong>
+          <span class="friend-description"><%= friend.description || '欢迎访问这个友好站点。' %></span>
+        </span>
+        <span class="friend-arrow" aria-hidden="true">↗</span>
+      </a>
+      <% }); %>
+    </div>
+    <% } else { %>
+    <p class="friends-empty">友链正在整理中，欢迎稍后再来看看。</p>
+    <% } %>
+
+    <section class="friend-apply" aria-labelledby="friend-apply-title">
+      <div class="friend-apply-intro">
+        <p class="friends-kicker">LINK EXCHANGE</p>
+        <h2 id="friend-apply-title">交换友链</h2>
+        <p>欢迎把你的网站名称、网址和简介（如有）发送给我。</p>
+      </div>
+      <dl class="friend-site-info">
+        <div><dt>名称</dt><dd>Lino笔记</dd></div>
+        <div><dt>简介</dt><dd>这个人很神秘。</dd></div>
+        <div><dt>链接</dt><dd><a href="https://www.linote.top/" target="_blank" rel="noopener noreferrer">https://www.linote.top/</a></dd></div>
+        <div><dt>头像</dt><dd><a href="https://www.linote.top/assets/linote-logo.png" target="_blank" rel="noopener noreferrer">https://www.linote.top/assets/linote-logo.png</a></dd></div>
+        <div><dt>联系</dt><dd><a href="mailto:linote99@foxmail.com">linote99@foxmail.com</a></dd></div>
+      </dl>
+    </section>
+
+    <p class="friends-back"><a href="<%- url_for('/') %>">← 回到首页</a></p>
+  </div>
+</section>

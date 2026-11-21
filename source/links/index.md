@@ -1,39 +1,8 @@
 ---
 title: "友情链接"
-layout: page
+layout: friends
 kicker: "FRIENDS & LINKS"
 lead: "这里收集 Lino笔记的友好站点。"
 permalink: "links/index.html"
 description: Lino笔记的友情链接列表。
 ---
-
-- [Minikano的小窝](https://kanokano.cn/)——鹿友，经常会开坑忘填（划掉）のblog
-- [Dinosaur's Blog](https://www.dinonode.org/)——拾一缕月光藏于袖，携满程星河赴远方。
-
-
-## 以下是我的信息：
-
-<div class="friend-profile" role="group" aria-label="Lino笔记友链信息">
-  <dl class="friend-profile-fields">
-    <div>
-      <dt>名称</dt>
-      <dd>Lino笔记</dd>
-    </div>
-    <div>
-      <dt>简介</dt>
-      <dd>这个人很神秘。</dd>
-    </div>
-    <div>
-      <dt>链接</dt>
-      <dd><a href="https://www.linote.top/">https://www.linote.top/</a></dd>
-    </div>
-    <div>
-      <dt>图片</dt>
-      <dd><a href="https://www.linote.top/assets/linote-logo.png">https://www.linote.top/assets/linote-logo.png</a></dd>
-    </div>
-    <div>
-      <dt>申请方式</dt>
-      <dd><a href="mailto:linote99@foxmail.com">linote99@foxmail.com</a>——将网站名称，网址，简介（如有）发送到我邮箱即可</dd>
-    </div>
-  </dl>
-</div>

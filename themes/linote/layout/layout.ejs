@@ -65,8 +65,8 @@ const rewardCopy = site.data.reward;
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (footerCopy.customLine) { %> · <%- footerCopy.customLine %><% } %></span>
-      <span><%= footerCopy.bottomLine %> <span class="footer-star">✳︎</span></span>
+      <span class="footer-copyright">© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (Array.isArray(footerCopy.customLinks)) { footerCopy.customLinks.forEach(function (link) { if (link && link.text && link.url) { %> · <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.text %></a><% } }); } %></span>
+      <span class="footer-motto"><span class="footer-star">✳︎</span><%= footerCopy.bottomLine %><span class="footer-star">✳︎</span></span>
     </div>
   </footer>
   <button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部">↑</button>
