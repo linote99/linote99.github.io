@@ -69,10 +69,7 @@ const showFooterUv = Boolean(footerStatUvLabel);
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy-group">
-        <span class="footer-copyright">© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (Array.isArray(footerCopy.customLinks)) { footerCopy.customLinks.forEach(function (link) { if (link && link.text && link.url) { %> · <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.text %></a><% } }); } %></span>
-        <span class="footer-motto"><span class="footer-star">✳︎</span><%= footerCopy.bottomLine %><span class="footer-star">✳︎</span></span>
-      </div>
+      <span class="footer-copyright">© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (Array.isArray(footerCopy.customLinks)) { footerCopy.customLinks.forEach(function (link) { if (link && link.text && link.url) { %> · <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.text %></a><% } }); } %></span>
       <% if (showFooterPv || showFooterUv) { %>
       <div class="footer-stats" id="footer-stats" aria-label="网站访问统计" aria-live="polite" hidden>
         <% if (showFooterPv) { %><span id="busuanzi_container_site_pv"><%= footerStatPvLabel %> <span class="footer-stat-value" id="busuanzi_value_site_pv"></span> 次</span><% } %>
@@ -80,6 +77,7 @@ const showFooterUv = Boolean(footerStatUvLabel);
         <% if (showFooterUv) { %><span id="busuanzi_container_site_uv"><%= footerStatUvLabel %> <span class="footer-stat-value" id="busuanzi_value_site_uv"></span> 人</span><% } %>
       </div>
       <% } %>
+      <span class="footer-motto"><span class="footer-star">✳︎</span><%= footerCopy.bottomLine %><span class="footer-star">✳︎</span></span>
     </div>
   </footer>
   <button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部">↑</button>
