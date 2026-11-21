@@ -64,6 +64,11 @@ const rewardCopy = site.data.reward;
         <a href="<%- url_for('/rss2.xml') %>">RSS 订阅</a>
       </div>
     </div>
+    <div class="footer-stats" id="footer-stats" aria-label="网站访问统计" aria-live="polite" hidden>
+      <span id="busuanzi_container_site_pv">总访问量 <span class="footer-stat-value" id="busuanzi_value_site_pv"></span> 次</span>
+      <span class="footer-stat-divider" aria-hidden="true">·</span>
+      <span id="busuanzi_container_site_uv">总访客数 <span class="footer-stat-value" id="busuanzi_value_site_uv"></span> 人</span>
+    </div>
     <div class="footer-bottom">
       <span class="footer-copyright">© <span id="year"><%= new Date().getFullYear() %></span> <%= footerCopy.copyrightLabel || 'Lino笔记' %><% if (Array.isArray(footerCopy.customLinks)) { footerCopy.customLinks.forEach(function (link) { if (link && link.text && link.url) { %> · <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.text %></a><% } }); } %></span>
       <span class="footer-motto"><span class="footer-star">✳︎</span><%= footerCopy.bottomLine %><span class="footer-star">✳︎</span></span>
@@ -96,5 +101,25 @@ const rewardCopy = site.data.reward;
     </div>
   </div>
 <% } %>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script>
+    (function () {
+      var stats = document.getElementById('footer-stats');
+      var pv = document.getElementById('busuanzi_container_site_pv');
+      if (!stats || !pv) return;
+      var revealWhenReady = function () {
+        if (pv.style.display === 'inline') {
+          stats.hidden = false;
+          observer.disconnect();
+          return true;
+        }
+        return false;
+      };
+      var observer = new MutationObserver(revealWhenReady);
+      if (!revealWhenReady()) {
+        observer.observe(pv, { attributes: true, attributeFilter: ['style'] });
+      }
+    }());
+  </script>
 </body>
 </html>
