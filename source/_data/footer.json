@@ -10,5 +10,7 @@
   "privacyLinkLabel": "使用与隐私",
   "tagsLinkLabel": "浏览标签",
   "friendsLinkLabel": "友情链接",
-  "bottomLine": "用好奇心记录世界"
+  "bottomLine": "用好奇心记录世界",
+  "sitePvLabel": "总访问量",
+  "siteUvLabel": "总访客数"
 }
