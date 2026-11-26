@@ -4,7 +4,7 @@ date: "2026-10-24 00:00:00"
 slug: "openwrt-diff-studio"
 permalink: "posts/openwrt-diff-studio/"
 summary: "OpenWrt Diff Studio 安卓版 v1.1.2：生成并应用 OpenWrt 差异包，已完成真机测试；注意 APK 为 debug 签名，不能覆盖正式签名版。"
-read: "6 分钟"
+read: "8 分钟"
 layout: post
 tags:
   - "OpenWrt"
@@ -16,6 +16,8 @@ categories:
 ---
 
 # OpenWrt Diff Studio 安卓版：在手机上生成差异包并更新设备
+
+> **此项目已停止维护，请使用官方版本安装器
 
 我把桌面版的 **OpenWrt Diff Studio**（含 Patch Updater）移植到了 Android。它做两件事：比较两版 OpenWrt 发行包，生成只包含变更文件的差异包；再通过 SSH 把差异包应用到正在运行 OpenWrt 的设备上。配置、额外插件和用户数据会保留，不需要每次都刷完整固件。
 
