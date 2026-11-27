@@ -3,7 +3,7 @@ title: "分区搬家记：给 1TB 的 MU300 做一次 GPT 手术"
 date: "2026-11-27 00:00:00"
 slug: "partition-transform"
 permalink: "posts/partition-transform/"
-summary: "1TB 的 MU300 上，OpenWrt 分区占 50 GiB 却只用不到 1G，共享分区反而最缺地，偏偏布局是安卓→共享→OpenWrt，谁让的地都到不了共享手里。本文先拆清两条规矩——文件系统只能往后扩不能往前扩、启动链只认分区名不认位置——再据此分两步搬家：手工改 GPT 删掉盘尾的旧 OpenWrt、让共享分区原地扩容吃下 53.7 GB（数据零搬运，60,600 个文件一个不少），然后由安装器在线缩安卓 18 GiB、新建小号 OpenWrt 并恢复备份。最终：安卓 32 GiB、OpenWrt 18 GiB、共享分区 963.7 GB。"
+summary: "OpenWrt 分区占 50 GiB 只用不到 1G。利用「文件系统只能往后扩、启动链只认分区名」两条规矩分两步搬家：删盘尾旧 OpenWrt 让共享分区原地扩容，再在线缩安卓新建 18 GiB 的 OpenWrt。结果：安卓 32 GiB、OpenWrt 18 GiB、共享分区 963.7 GB，数据零丢失。"
 read: "5 分钟"
 layout: post
 tags:
